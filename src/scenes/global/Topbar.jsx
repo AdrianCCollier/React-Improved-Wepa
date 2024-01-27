@@ -22,10 +22,10 @@ const Topbar = () => {
         backgroundColor={colors.primary[400]}
         borderRadius="3px"
       >
-        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search"></InputBase>
-        <IconButton type="button" sx={{ p: 1 }}>
+        {/* <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search"></InputBase> */}
+        {/* <IconButton type="button" sx={{ p: 1 }}>
           <SearchIcon></SearchIcon>
-        </IconButton>
+        </IconButton> */}
       </Box>
       {/* ICONS */}
       <Box display="flex">
@@ -36,9 +36,9 @@ const Topbar = () => {
             <LightModeOutlinedIcon></LightModeOutlinedIcon>
           )}
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <NotificationsOutlinedIcon></NotificationsOutlinedIcon>
-        </IconButton>
+        </IconButton> */}
         <IconButton>
           <SettingsOutlinedIcon></SettingsOutlinedIcon>
         </IconButton>
