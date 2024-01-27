@@ -13,6 +13,11 @@ import BarChart from '../../components/BarChart'
 import StatBox from '../../components/StatBox'
 import ProgressCircle from '../../components/ProgressCircle'
 
+// New Icons
+import ComputerIcon from '@mui/icons-material/Computer'
+import SwitchLeftIcon from '@mui/icons-material/SwitchLeft'
+import SwitchRightIcon from '@mui/icons-material/SwitchRight'
+
 const Dashboard = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
@@ -20,7 +25,12 @@ const Dashboard = () => {
   return (
     <Box m="20px">
       {/* HEADER */}
-      <Box display="flex"  alignItems="center" justifyContent="center" textAlign="center">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+      >
         <Header title="NMSU Lab Crabs" subtitle="Automated WEPA Tracker" />
 
         {/* <Box>
@@ -55,12 +65,12 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
+            title="Location"
+            subtitle="HJLC Petes Place BC309"
+            // progress="0.75"
+            // increase="+14%"
             icon={
-              <EmailIcon
+              <ComputerIcon
                 sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
               />
             }
@@ -73,7 +83,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBox
+          {/* <StatBox
             title="431,225"
             subtitle="Sales Obtained"
             progress="0.50"
@@ -83,7 +93,7 @@ const Dashboard = () => {
                 sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
               />
             }
-          />
+          /> */}
         </Box>
         <Box
           gridColumn="span 3"
@@ -92,7 +102,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBox
+          {/* <StatBox
             title="32,441"
             subtitle="New Clients"
             progress="0.30"
@@ -102,7 +112,7 @@ const Dashboard = () => {
                 sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
               />
             }
-          />
+          /> */}
         </Box>
         <Box
           gridColumn="span 3"
@@ -111,7 +121,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBox
+          {/* <StatBox
             title="1,325,134"
             subtitle="Traffic Received"
             progress="0.80"
@@ -121,7 +131,7 @@ const Dashboard = () => {
                 sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
               />
             }
-          />
+          /> */}
         </Box>
 
         {/* ROW 2 */}
@@ -129,6 +139,7 @@ const Dashboard = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          // border="solid 5px red"
         >
           <Box
             mt="25px"
@@ -136,54 +147,61 @@ const Dashboard = () => {
             display="flex "
             justifyContent="space-between"
             alignItems="center"
+            // border="solid 5px green"
           >
             <Box>
               <Typography
                 variant="h5"
                 fontWeight="600"
                 color={colors.grey[100]}
+                // border="solid 5px yellow"
               >
-                Revenue Generated
+                .
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
+                // border="solid 5px purple"
               >
-                $59,342.32
+                .
               </Typography>
             </Box>
-            <Box>
+            <Box
+            // border="solid 5px orange"
+            >
               <IconButton>
-                <DownloadOutlinedIcon
+                <SwitchLeftIcon
                   sx={{ fontSize: '26px', color: colors.greenAccent[500] }}
                 />
               </IconButton>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
+          {/* <Box height="250px" m="-20px 0 0 0" border="solid 5px brown">
             <LineChart isDashboard={true} />
-          </Box>
+          </Box> */}
         </Box>
         <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
+          // border="solid 5px red"
         >
-          <Box
+          {/* <Box
             display="flex"
             justifyContent="space-between"
+            border="solid 5px yellow"
             alignItems="center"
             borderBottom={`4px solid ${colors.primary[500]}`}
             colors={colors.grey[100]}
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
+              .sdsadasdasd
             </Typography>
-          </Box>
-          {mockTransactions.map((transaction, i) => (
+          </Box> */}
+          {/* {mockTransactions.map((transaction, i) => (
             <Box
               key={`${transaction.txId}-${i}`}
               display="flex"
@@ -213,7 +231,7 @@ const Dashboard = () => {
                 ${transaction.cost}
               </Box>
             </Box>
-          ))}
+          ))} */}
         </Box>
 
         {/* ROW 3 */}
@@ -221,10 +239,16 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          border="solid 5px green"
           p="30px"
         >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
+          <Typography
+            textAlign="center"
+            // border="solid 5px red"
+            variant="h5"
+            fontWeight="600"
+          >
+            TBD
           </Typography>
           <Box
             display="flex"
@@ -232,31 +256,38 @@ const Dashboard = () => {
             alignItems="center"
             mt="25px"
           >
-            <ProgressCircle size="125" />
+            {/* <ProgressCircle size="125" /> */}
             <Typography
               variant="h5"
+              // border="solid 5px yellow"
               color={colors.greenAccent[500]}
               sx={{ mt: '15px' }}
             >
-              $48,352 revenue generated
+              .
             </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
+            {/* <Typography>Includes extra misc expenditures and costs</Typography> */}
           </Box>
         </Box>
         <Box
           gridColumn="span 4"
           gridRow="span 2"
+          border="solid 5px red"
           backgroundColor={colors.primary[400]}
         >
           <Typography
             variant="h5"
             fontWeight="600"
+            textAlign="center"
             sx={{ padding: '30px 30px 0 30px' }}
           >
-            Sales Quantity
+            TBD
           </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+          <Box 
+          height="250px" 
+          mt="-20px"
+          // border="solid 5px green"
+          >
+            {/* <BarChart isDashboard={true} /> */}
           </Box>
         </Box>
         <Box
@@ -270,11 +301,11 @@ const Dashboard = () => {
             fontWeight="600"
             sx={{ marginBottom: '15px' }}
           >
-            Geography Based Traffic
+            .
           </Typography>
-          <Box height="200px">
+          {/* <Box height="200px" border="solid 5px red">
             <GeographyChart isDashboard={true} />
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </Box>
