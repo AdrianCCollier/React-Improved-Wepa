@@ -52,6 +52,7 @@ const Dashboard = () => {
       {/* GRID & CHARTS */}
       <Box
         display="grid"
+        // border="solid 5px red"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
@@ -239,7 +240,7 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          border="solid 5px green"
+          // border="solid 5px green"
           p="30px"
         >
           <Typography
@@ -271,7 +272,7 @@ const Dashboard = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          border="solid 5px red"
+          // border="solid 5px red"
           backgroundColor={colors.primary[400]}
         >
           <Typography
