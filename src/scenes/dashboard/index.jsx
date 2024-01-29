@@ -18,6 +18,10 @@ import ComputerIcon from '@mui/icons-material/Computer'
 import SwitchLeftIcon from '@mui/icons-material/SwitchLeft'
 import SwitchRightIcon from '@mui/icons-material/SwitchRight'
 
+// Components
+import WepaTable from '../table/WepaTable'
+
+
 const Dashboard = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
@@ -138,49 +142,15 @@ const Dashboard = () => {
         {/* ROW 2 */}
         <Box
           gridColumn="span 8"
-          gridRow="span 2"
+          gridRow="span 4"
           backgroundColor={colors.primary[400]}
           // border="solid 5px red"
         >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex "
-            justifyContent="space-between"
-            alignItems="center"
-            // border="solid 5px green"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-                // border="solid 5px yellow"
-              >
-                .
-              </Typography>
-              <Typography
-                variant="h3"
-                fontWeight="bold"
-                color={colors.greenAccent[500]}
-                // border="solid 5px purple"
-              >
-                .
-              </Typography>
-            </Box>
-            <Box
-            // border="solid 5px orange"
-            >
-              <IconButton>
-                <SwitchLeftIcon
-                  sx={{ fontSize: '26px', color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
-          </Box>
-          {/* <Box height="250px" m="-20px 0 0 0" border="solid 5px brown">
-            <LineChart isDashboard={true} />
-          </Box> */}
+        {/* WEPA TABLE HERE   */}
+         <WepaTable></WepaTable>
+
+
+
         </Box>
         <Box
           gridColumn="span 4"
@@ -269,45 +239,7 @@ const Dashboard = () => {
             {/* <Typography>Includes extra misc expenditures and costs</Typography> */}
           </Box>
         </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          // border="solid 5px red"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            textAlign="center"
-            sx={{ padding: '30px 30px 0 30px' }}
-          >
-            TBD
-          </Typography>
-          <Box 
-          height="250px" 
-          mt="-20px"
-          // border="solid 5px green"
-          >
-            {/* <BarChart isDashboard={true} /> */}
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: '15px' }}
-          >
-            .
-          </Typography>
-          {/* <Box height="200px" border="solid 5px red">
-            <GeographyChart isDashboard={true} />
-          </Box> */}
-        </Box>
+        
       </Box>
     </Box>
   )
