@@ -128,7 +128,7 @@ const WepaTable = () => {
           {data.map((data, index) => (
             <TableRow
               key={index}
-              sx={{ '&:nth-of-type(odd)': { backgroundColor: 'action.hover' }, '&:hover': { backgroundColor: 'action.selected', cursor: 'pointer'} }}
+              sx={{  '&:hover': { backgroundColor: 'action.selected', cursor: 'pointer'} }}
             >
               <TableCell sx={{ py: 0, px: 1, fontSize: '0.875rem' }}>
                 <Typography variant="body2">{data.location}</Typography>

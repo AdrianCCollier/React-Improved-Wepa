@@ -21,6 +21,7 @@ import SwitchRightIcon from '@mui/icons-material/SwitchRight'
 // Components
 import WepaTable from '../table/WepaTable'
 
+
 const Dashboard = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
@@ -52,6 +53,7 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
+          borderRadius="5px"
           justifyContent="center"
         >
           <StatBox
@@ -72,6 +74,7 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="5px"
         >
           <Typography>Aggie Prints Today:</Typography>
         </Box>
@@ -81,6 +84,7 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="5px"
         >
           <Typography>BC Prints Today:</Typography>
         </Box>
@@ -90,6 +94,7 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="5px"
         >
           <Typography>Petes Prints Today:</Typography>
         </Box>
@@ -98,6 +103,7 @@ const Dashboard = () => {
         <Box
           gridColumn="span 8"
           gridRow="span 4"
+          borderRadius="5px"
           backgroundColor={colors.primary[400]}
           // border="solid 5px red"
         >
@@ -107,17 +113,21 @@ const Dashboard = () => {
         <Box
           gridColumn="span 4"
           gridRow="span 2"
+          borderRadius="5px"
           backgroundColor={colors.primary[400]}
           overflow="auto"
           // border="solid 5px red"
         >
-          <Typography variant='h3' textAlign="center">Settings</Typography>
+          <Typography variant="h3" textAlign="center">
+            Settings
+          </Typography>
         </Box>
 
         {/* ROW 3 */}
         <Box
           gridColumn="span 4"
           gridRow="span 2"
+          borderRadius="5px"
           backgroundColor={colors.primary[400]}
           // border="solid 5px green"
           p="30px"
