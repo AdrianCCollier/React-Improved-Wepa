@@ -41,7 +41,7 @@ const Dashboard = () => {
       {/* GRID & CHARTS */}
       <Box
         display="grid"
-        border="solid 5px red"
+        // border="solid 5px red"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="120px"
         gap="20px"
@@ -73,6 +73,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
+          <Typography>Aggie Prints Today:</Typography>
         </Box>
         <Box
           gridColumn="span 3"
@@ -81,6 +82,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
+          <Typography>BC Prints Today:</Typography>
         </Box>
         <Box
           gridColumn="span 3"
@@ -89,6 +91,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
+          <Typography>Petes Prints Today:</Typography>
         </Box>
 
         {/* ROW 2 */}
@@ -108,6 +111,7 @@ const Dashboard = () => {
           overflow="auto"
           // border="solid 5px red"
         >
+          <Typography variant='h3' textAlign="center">Settings</Typography>
         </Box>
 
         {/* ROW 3 */}
@@ -124,7 +128,7 @@ const Dashboard = () => {
             variant="h5"
             fontWeight="600"
           >
-            TBD
+            Birthday Tracker
           </Typography>
           <Box
             display="flex"
@@ -137,9 +141,7 @@ const Dashboard = () => {
               // border="solid 5px yellow"
               color={colors.greenAccent[500]}
               sx={{ mt: '15px' }}
-            >
-              .
-            </Typography>
+            ></Typography>
           </Box>
         </Box>
       </Box>

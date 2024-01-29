@@ -13,73 +13,82 @@ import {
 } from '@mui/material'
 // import  ExpandMoreIcon  from '@mui/icons-material/ExpandMore'
 
-// Mock data
-const mockData = [
-  {
-    location: 'Aggie, Left Kiosk',
-    serial: '12345',
-    status: 'Green',
-    notify: false,
-  },
-  {
-    location: 'Aggie, Right Kiosk',
-    serial: '12346',
-    status: 'Yellow',
-    notify: false,
-  },
-  {
-    location: 'Library, Main Entrance',
-    serial: '12347',
-    status: 'Yellow',
-    notify: false,
-  },
-  {
-    location: 'Library, Main Entrance',
-    serial: '12347',
-    status: 'Red',
-    notify: false,
-  },
-  {
-    location: 'Library, Main Entrance',
-    serial: '12347',
-    status: 'Red',
-    notify: false,
-  },
-  {
-    location: 'Library, Main Entrance',
-    serial: '12347',
-    status: 'Red',
-    notify: false,
-  },
-  {
-    location: 'Library, Main Entrance',
-    serial: '12347',
-    status: 'Red',
-    notify: false,
-  },
-  {
-    location: 'Library, Main Entrance',
-    serial: '12347',
-    status: 'Red',
-    notify: false,
-  },
-  {
-    location: 'Library, Main Entrance',
-    serial: '12347',
-    status: 'Red',
-    notify: false,
-  },
-]
+
 
 const WepaTable = () => {
   const [isMinimized, setIsMinimized] = useState(true)
 
+  // mockData as mutable
+  const [data, setData] = useState([
+    {
+      location: 'Aggie, Left Kiosk',
+      serial: '12345',
+      status: 'Green',
+      notify: false,
+    },
+    {
+      location: 'Aggie, Right Kiosk',
+      serial: '12346',
+      status: 'Yellow',
+      notify: false,
+    },
+    {
+      location: 'Library, Main Entrance',
+      serial: '12347',
+      status: 'Yellow',
+      notify: false,
+    },
+    {
+      location: 'Library, Main Entrance',
+      serial: '12347',
+      status: 'Red',
+      notify: false,
+    },
+    {
+      location: 'Library, Main Entrance',
+      serial: '12347',
+      status: 'Red',
+      notify: false,
+    },
+    {
+      location: 'Library, Main Entrance',
+      serial: '12347',
+      status: 'Red',
+      notify: false,
+    },
+    {
+      location: 'Library, Main Entrance',
+      serial: '12347',
+      status: 'Red',
+      notify: false,
+    },
+    {
+      location: 'Library, Main Entrance',
+      serial: '12347',
+      status: 'Red',
+      notify: false,
+    },
+    {
+      location: 'Library, Main Entrance',
+      serial: '12347',
+      status: 'Red',
+      notify: false,
+    },
+  ])
   const handleExpandClick = () => {
     setIsMinimized(!isMinimized)
   }
 
-  const handleToggleNotifications = () => {
-    console.log('Clicked handleToggleNotifications')
+  const handleToggleNotifications = (index) => {
+    
+    const newData = data.map((item, i) => {
+      if(i === index) {
+        return { ...item, notify: !item.notify }
+      }
+        return item;
+    });
+    console.log(newData);
+    setData(newData);
   }
 
   return (
@@ -116,10 +125,10 @@ const WepaTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {mockData.map((data, index) => (
+          {data.map((data, index) => (
             <TableRow
               key={index}
-              sx={{ '&:nth-of-type(odd)': { backgroundColor: 'action.hover' } }}
+              sx={{ '&:nth-of-type(odd)': { backgroundColor: 'action.hover' }, '&:hover': { backgroundColor: 'action.selected', cursor: 'pointer'} }}
             >
               <TableCell sx={{ py: 0, px: 1, fontSize: '0.875rem' }}>
                 <Typography variant="body2">{data.location}</Typography>
@@ -129,7 +138,7 @@ const WepaTable = () => {
               <TableCell>
                 <Switch
                   checked={data.notify}
-                  onChange={handleToggleNotifications}
+                  onChange={() => handleToggleNotifications(index)}
                 ></Switch>
               </TableCell>
             </TableRow>
