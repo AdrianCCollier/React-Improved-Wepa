@@ -9,6 +9,7 @@ import {
   Paper,
   Switch,
   IconButton,
+  Typography,
 } from '@mui/material'
 // import  ExpandMoreIcon  from '@mui/icons-material/ExpandMore'
 
@@ -82,31 +83,47 @@ const WepaTable = () => {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <IconButton onClick={handleExpandClick} aria-label="expand">
-        {/* {isMinimized ? <ExpandMoreIcon></ExpandMoreIcon> : <ExpandLessIcon></ExpandLessIcon>} */}
-      </IconButton>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
+    <TableContainer component={Paper} sx={{ maxHeight: '100%' }}>
+      <IconButton onClick={handleExpandClick} aria-label="expand"></IconButton>
+      <Table
+        sx={{ minWidth: 200 }}
+        size="small"
+        aria-label="WEPA table"
+        stickyHeader
+      >
         <TableHead>
           <TableRow>
-            <TableCell sx={{ py: 0.5, px: 1, fontSize: '0.875rem' }}>
+            <TableCell
+              sx={{ py: 0, px: 1, fontSize: '0.875rem', fontWeight: 'bold' }}
+            >
               Location
             </TableCell>
-            <TableCell sx={{ py: 0.5, px: 1, fontSize: '0.875rem' }}>
+            <TableCell
+              sx={{ py: 0, px: 1, fontSize: '0.875rem', fontWeight: 'bold' }}
+            >
               Serial #
             </TableCell>
-            <TableCell sx={{ py: 0.5, px: 1, fontSize: '0.875rem' }}>
+            <TableCell
+              sx={{ py: 0, px: 1, fontSize: '0.875rem', fontWeight: 'bold' }}
+            >
               Status
             </TableCell>
-            <TableCell sx={{ py: 0.5, px: 1, fontSize: '0.875rem' }}>
+            <TableCell
+              sx={{ py: 0, px: 1, fontSize: '0.875rem', fontWeight: 'bold' }}
+            >
               Notifications
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {mockData.map((data, index) => (
-            <TableRow key={index}>
-              <TableCell>{data.location}</TableCell>
+            <TableRow
+              key={index}
+              sx={{ '&:nth-of-type(odd)': { backgroundColor: 'action.hover' } }}
+            >
+              <TableCell sx={{ py: 0, px: 1, fontSize: '0.875rem' }}>
+                <Typography variant="body2">{data.location}</Typography>
+              </TableCell>
               <TableCell>{data.serial}</TableCell>
               <TableCell>{data.status}</TableCell>
               <TableCell>
