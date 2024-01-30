@@ -163,6 +163,22 @@ export const themeSettings = (mode) => {
             },
           }),
     },
+    components: {
+      MuiTableContainer: {
+        styleOverrides: {
+          root: {
+            backgroundColor: colors.primary[400],
+          },
+        },
+      },
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            color: mode === 'dark' ? 'white' : 'black',
+          },
+        },
+      },
+    },
     typography: {
       fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
       fontSize: 12,

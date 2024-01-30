@@ -1,4 +1,11 @@
-import { Box, Button, IconButton, Typography, useTheme } from '@mui/material'
+import {
+  Box,
+  Button,
+  IconButton,
+  ThemeProvider,
+  Typography,
+  useTheme,
+} from '@mui/material'
 import { tokens } from '../../theme'
 import { mockTransactions } from '../../data/mockData'
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
@@ -20,7 +27,6 @@ import SwitchRightIcon from '@mui/icons-material/SwitchRight'
 
 // Components
 import WepaTable from '../table/WepaTable'
-
 
 const Dashboard = () => {
   const theme = useTheme()
@@ -108,6 +114,7 @@ const Dashboard = () => {
           // border="solid 5px red"
         >
           {/* WEPA TABLE HERE   */}
+
           <WepaTable></WepaTable>
         </Box>
         <Box
