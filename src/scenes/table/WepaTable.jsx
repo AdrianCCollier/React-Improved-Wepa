@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Table,
   TableBody,
@@ -164,6 +164,14 @@ const WepaTable = () => {
       alwaysVisible: isMinimized ? false : true,
     },
   ]
+
+  useEffect(() => {
+    const loadedData = data.map(item => {
+      const notifyState = localStorage.getItem(item.serial);
+      return notifyState ? { ...item, notify: JSON.parse(notifyState) } : item;
+    });
+    setData(loadedData);
+  }, []);
 
   const handleExpandClick = () => {
     console.log('clicked handleExpandClick')
