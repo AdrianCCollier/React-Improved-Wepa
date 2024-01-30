@@ -173,7 +173,10 @@ const WepaTable = () => {
   const handleToggleNotifications = (index) => {
     const newData = data.map((item, i) => {
       if (i === index) {
-        return { ...item, notify: !item.notify }
+        const updatedItem = { ...item, notify: !item.notify };
+        // Update Local Storage
+        localStorage.setItem(item.serial, JSON.stringify(updatedItem.notify));
+        return updatedItem;
       }
       return item
     })
