@@ -25,7 +25,7 @@ function App() {
               
               
               
-              <Route path="/geography" element={<Geography />} />
+            
             </Routes>
           </main>
         </div>
