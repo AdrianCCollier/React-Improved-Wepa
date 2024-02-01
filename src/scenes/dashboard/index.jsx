@@ -14,10 +14,6 @@ import PointOfSaleIcon from '@mui/icons-material/PointOfSale'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import TrafficIcon from '@mui/icons-material/Traffic'
 import Header from '../../components/Header'
-
-
-
-import BarChart from '../../components/BarChart'
 import StatBox from '../../components/StatBox'
 import ProgressCircle from '../../components/ProgressCircle'
 
