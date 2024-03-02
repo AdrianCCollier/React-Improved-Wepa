@@ -12,10 +12,6 @@ import { tokens } from '../../theme'
 import Header from '../../components/Header'
 import StatBox from '../../components/StatBox'
 
-
-// New Icons
-
-
 // Components
 import WepaTable from './WepaTable'
 import LocationBox from './LocationBox'
