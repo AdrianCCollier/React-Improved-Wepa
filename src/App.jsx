@@ -16,16 +16,6 @@ function App() {
             <Topbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              
-              
-              
-              
-              
-              
-              
-              
-              
-            
             </Routes>
           </main>
         </div>

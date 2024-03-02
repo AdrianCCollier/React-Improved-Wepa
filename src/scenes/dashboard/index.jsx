@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+
 import {
   Box,
   Button,
@@ -26,8 +28,24 @@ import SwitchRightIcon from '@mui/icons-material/SwitchRight'
 import WepaTable from '../table/WepaTable'
 
 const Dashboard = () => {
-  const theme = useTheme()
-  const colors = tokens(theme.palette.mode)
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [printerData, setPrinterData] = useState([]);
+
+  useEffect(() => {
+    const fetchPrinters = async () => {
+      try {
+        const response = await fetch('/printers');
+        if(!response.ok) throw new Error(`HTTP error, status: ${response.status}`);
+        const printers = await response.json();
+        setPrinterData(printers);
+      } catch (error) {
+        console.error("Failed to fetch printers: ", error);
+      }
+    };
+
+    fetchPrinters();
+  }, []);
 
   return (
     <Box m="20px">
@@ -112,7 +130,8 @@ const Dashboard = () => {
         >
           {/* WEPA TABLE HERE   */}
 
-          <WepaTable></WepaTable>
+          {/* Passing back-end printer data as prop to child */}
+          <WepaTable data={printerData}></WepaTable>
         </Box>
         <Box
           gridColumn="span 4"

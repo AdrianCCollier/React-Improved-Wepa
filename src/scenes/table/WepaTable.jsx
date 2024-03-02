@@ -13,124 +13,60 @@ import {
 } from '@mui/material'
 import OpenInFullIcon from '@mui/icons-material/OpenInFull'
 
-const WepaTable = () => {
-  const [isMinimized, setIsMinimized] = useState(true)
+  const serialToLocationMapping = {
+    '01041': 'Aggie, Left Kiosk',
+    '01285': 'Aggie, Right Kiosk',
+    '00884': 'Business Complex 309',
 
- const [data, setData] = useState([
-   {
-     location: 'Aggie, Left Kiosk',
-     serial: '12345',
-     status: 'Green',
-     notify: false,
-     statusMsg: 'Printer Jam',
-     printerTxt: 'Fix it fam',
-     tonerLvl: '100',
-     drumLvl: '100',
-     beltLvl: '100',
-     fuserLvl: '100',
-   },
-   {
-     location: 'Aggie, Right Kiosk',
-     serial: '12346',
-     status: 'Yellow',
-     notify: true,
-     statusMsg: 'Low Toner',
-     printerTxt: 'Refill required',
-     tonerLvl: '25',
-     drumLvl: '85',
-     beltLvl: '60',
-     fuserLvl: '90',
-   },
-   {
-     location: 'Library, Main Entrance',
-     serial: '12347',
-     status: 'Red',
-     notify: true,
-     statusMsg: 'Paper Jam',
-     printerTxt: 'Immediate attention needed',
-     tonerLvl: '50',
-     drumLvl: '50',
-     beltLvl: '75',
-     fuserLvl: '80',
-   },
-   {
-     location: 'Student Union, Floor 1',
-     serial: '12348',
-     status: 'Green',
-     notify: false,
-     statusMsg: 'Operating Normally',
-     printerTxt: 'All good',
-     tonerLvl: '80',
-     drumLvl: '90',
-     beltLvl: '100',
-     fuserLvl: '100',
-   },
-   {
-     location: 'Engineering Building, Lab 3',
-     serial: '12349',
-     status: 'Yellow',
-     notify: false,
-     statusMsg: 'Maintenance Required',
-     printerTxt: 'Checkup due',
-     tonerLvl: '60',
-     drumLvl: '70',
-     beltLvl: '80',
-     fuserLvl: '85',
-   },
-   {
-     location: 'Business Complex, Room 201',
-     serial: '12350',
-     status: 'Red',
-     notify: true,
-     statusMsg: 'Out of Paper',
-     printerTxt: 'Reload tray',
-     tonerLvl: '100',
-     drumLvl: '100',
-     beltLvl: '100',
-     fuserLvl: '100',
-   },
-   {
-     location: 'Dormitory A, Common Area',
-     serial: '12351',
-     status: 'Green',
-     notify: false,
-     statusMsg: 'Ready for Use',
-     printerTxt: 'Waiting for job',
-     tonerLvl: '90',
-     drumLvl: '95',
-     beltLvl: '85',
-     fuserLvl: '95',
-   },
-   {
-     location: 'Health Sciences, Floor 2',
-     serial: '12352',
-     status: 'Yellow',
-     notify: true,
-     statusMsg: 'Drum Near End of Life',
-     printerTxt: 'Consider replacement',
-     tonerLvl: '70',
-     drumLvl: '20',
-     beltLvl: '90',
-     fuserLvl: '90',
-   },
-   {
-     location: 'Art Building, Studio 5',
-     serial: '12353',
-     status: 'Red',
-     notify: false,
-     statusMsg: 'Fuser Overheating',
-     printerTxt: 'Shutdown required',
-     tonerLvl: '100',
-     drumLvl: '100',
-     beltLvl: '100',
-     fuserLvl: '40',
-   },
- ])
+    '00846': 'Zuhl, Entrance Kiosk',
+    '00912': 'Zuhl, Back Kiosk',
+    '00840': 'Petes, Left Kiosk',
+    '03332': 'Petes, Right Kiosk',
+    '00093': 'Corbett, Regular Kiosk',
+    '00685': 'Corbett, Mini Kiosk',
+  }
+
+const WepaTable = ({ data }) => {
+  const [isMinimized, setIsMinimized] = useState(true);
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    const parsedData = data.map((item) => {
+
+      const customSerial = item.name.replace('KIOSK_PROD_', '');
+      const customLocation = serialToLocationMapping[customSerial] || item.location.locationDescription;
+      const notifyState = JSON.parse(localStorage.getItem(item.name));
+
+      return {
+        ...item,
+        serial: customSerial,
+        location: customLocation,
+        status: item.status.printerStatus,
+        notifications: notifyState,
+        statusMsg: item.status.kioskStatus,
+        printerText: item.status.snmpAlertsText,
+
+        tonerBlack: Math.floor(item.consumablesRemaining.toner.black),
+        tonerCyan: Math.floor(item.consumablesRemaining.toner.cyan),
+        tonerMagenta: Math.floor(item.consumablesRemaining.toner.magenta),
+        tonerYellow: Math.floor(item.consumablesRemaining.toner.yellow),
+
+        drumBlack: Math.floor(item.consumablesRemaining.drum.black),
+        drumCyan: Math.floor(item.consumablesRemaining.drum.cyan),
+        drumMagenta: Math.floor(item.consumablesRemaining.drum.magenta),
+        drumYellow: Math.floor(item.consumablesRemaining.drum.yellow),
+
+        beltLvl: Math.floor(item.consumablesRemaining.belt),
+        fuserLvl: Math.floor(item.consumablesRemaining.fuser),
+      }
+    });
+    setTableData(parsedData);
+  }, [data]);
 
   // Updated columns metadata to include all ten columns with visibility control
   const columns = [
-    { id: 'location', label: 'Location', alwaysVisible: true },
     { id: 'serial', label: 'Serial ', alwaysVisible: true },
+    { id: 'location', label: 'Location', alwaysVisible: true },
     { id: 'status', label: 'Status', alwaysVisible: true },
     { id: 'notify', label: 'Notifications', alwaysVisible: true },
     {
@@ -139,20 +75,60 @@ const WepaTable = () => {
       alwaysVisible: isMinimized ? false : true,
     },
     {
-      id: 'printerTxt',
+      id: 'printerText',
       label: 'Printer Text',
       alwaysVisible: isMinimized ? false : true,
     },
     {
-      id: 'tonerLvl',
-      label: 'Toner %',
-      alwaysVisible: isMinimized ? false : true,
+      id: 'tonerBlack',
+      label: 'B',
+      partOf: 'tonerLvl',
+      alwaysVisible: !isMinimized,
     },
     {
-      id: 'drumLvl',
-      label: 'Drum %',
-      alwaysVisible: isMinimized ? false : true,
+      id: 'tonerCyan',
+      label: 'C',
+      partOf: 'tonerLvl',
+      alwaysVisible: !isMinimized,
     },
+    {
+      id: 'tonerMagenta',
+      label: 'M',
+      partOf: 'tonerLvl',
+      alwaysVisible: !isMinimized,
+    },
+    {
+      id: 'tonerYellow',
+      label: 'Y',
+      partOf: 'tonerLvl',
+      alwaysVisible: !isMinimized,
+    },
+
+    {
+      id: 'drumBlack',
+      label: 'B',
+      partOf: 'drumLvl',
+      alwaysVisible: !isMinimized,
+    },
+    {
+      id: 'drumCyan',
+      label: 'C',
+      partOf: 'drumLvl',
+      alwaysVisible: !isMinimized,
+    },
+    {
+      id: 'drumMagenta',
+      label: 'M',
+      partOf: 'drumLvl',
+      alwaysVisible: !isMinimized,
+    },
+    {
+      id: 'drumYellow',
+      label: 'Y',
+      partOf: 'drumLvl',
+      alwaysVisible: !isMinimized,
+    },
+
     {
       id: 'beltLvl',
       label: 'Belt %',
@@ -165,14 +141,6 @@ const WepaTable = () => {
     },
   ]
 
-  useEffect(() => {
-    const loadedData = data.map(item => {
-      const notifyState = localStorage.getItem(item.serial);
-      return notifyState ? { ...item, notify: JSON.parse(notifyState) } : item;
-    });
-    setData(loadedData);
-  }, []);
-
   const handleExpandClick = () => {
     console.log('clicked handleExpandClick')
     setIsMinimized(!isMinimized)
@@ -181,10 +149,10 @@ const WepaTable = () => {
   const handleToggleNotifications = (index) => {
     const newData = data.map((item, i) => {
       if (i === index) {
-        const updatedItem = { ...item, notify: !item.notify };
+        const updatedItem = { ...item, notify: !item.notify }
         // Update Local Storage
-        localStorage.setItem(item.serial, JSON.stringify(updatedItem.notify));
-        return updatedItem;
+        localStorage.setItem(item.serial, JSON.stringify(updatedItem.notify))
+        return updatedItem
       }
       return item
     })
@@ -222,7 +190,7 @@ const WepaTable = () => {
                 <TableCell
                   key={column.id}
                   sx={{
-                    py: 1,
+                    py: 0.5,
                     px: 1,
                     fontSize: '0.875rem',
                     fontWeight: 'bold',
@@ -235,9 +203,9 @@ const WepaTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row, index) => (
+          {tableData.map((row, rowIndex) => (
             <TableRow
-              key={index}
+              key={rowIndex}
               sx={{
                 backgroundColor: '#202b46',
                 '&:hover': { backgroundColor: 'action.selected' },
@@ -249,18 +217,18 @@ const WepaTable = () => {
                   <TableCell
                     key={column.id}
                     sx={{
-                      py: 1,
+                      py: 0.5,
                       px: 1,
-                      fontSize: '0.875rem',
+                      fontSize: '0.775rem',
                     }}
                   >
                     {column.id === 'notify' ? (
                       <Switch
                         checked={row[column.id]}
-                        onChange={() => handleToggleNotifications(index)}
+                        onChange={() => handleToggleNotifications(rowIndex)}
                       />
                     ) : (
-                      row[column.id] || 'N/A' // Fallback for any missing data
+                      row[column.id]
                     )}
                   </TableCell>
                 ))}
