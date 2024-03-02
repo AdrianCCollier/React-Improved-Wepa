@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { tokens } from '../../theme'
 import Header from '../../components/Header'
-// Components
+
 import WepaTable from './WepaTable'
 import LocationBox from './LocationBox'
 const Dashboard = () => {
