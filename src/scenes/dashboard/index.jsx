@@ -57,7 +57,6 @@ const Dashboard = () => {
         
         <LocationBox colors={colors}></LocationBox>
 
-
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
