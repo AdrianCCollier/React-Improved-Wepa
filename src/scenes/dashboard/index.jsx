@@ -15,7 +15,6 @@ import StatBox from '../../components/StatBox'
 
 // New Icons
 import SwitchLeftIcon from '@mui/icons-material/SwitchLeft'
-import SwitchRightIcon from '@mui/icons-material/SwitchRight'
 
 // Components
 import WepaTable from './WepaTable'
