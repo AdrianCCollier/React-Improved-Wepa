@@ -10,8 +10,6 @@ import {
 } from '@mui/material'
 import { tokens } from '../../theme'
 import Header from '../../components/Header'
-import StatBox from '../../components/StatBox'
-
 // Components
 import WepaTable from './WepaTable'
 import LocationBox from './LocationBox'
