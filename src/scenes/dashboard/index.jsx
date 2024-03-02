@@ -41,7 +41,6 @@ const Dashboard = () => {
         alignItems="center"
         justifyContent="center"
         textAlign="center"
-        // border="solid 5px red"
       >
         <Header title="NMSU Lab Crabs" subtitle="Automated Wepa App" />
       </Box>
