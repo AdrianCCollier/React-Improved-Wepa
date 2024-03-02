@@ -14,7 +14,6 @@ import StatBox from '../../components/StatBox'
 
 
 // New Icons
-import ComputerIcon from '@mui/icons-material/Computer'
 import SwitchLeftIcon from '@mui/icons-material/SwitchLeft'
 import SwitchRightIcon from '@mui/icons-material/SwitchRight'
 
@@ -59,7 +58,7 @@ const Dashboard = () => {
         display="grid"
         //border="solid 5px red"
         gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="120px"
+        gridAutoRows="160"
         gap="20px"
       >
         {/* ROW 1 */}
@@ -82,7 +81,9 @@ const Dashboard = () => {
             }
           />
         </Box> */}
-        <LocationBox></LocationBox>
+        <LocationBox colors={colors}></LocationBox>
+
+
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
