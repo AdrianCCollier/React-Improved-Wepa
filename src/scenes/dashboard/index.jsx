@@ -9,9 +9,6 @@ import {
   useTheme,
 } from '@mui/material'
 import { tokens } from '../../theme'
-import EmailIcon from '@mui/icons-material/Email'
-
-
 import Header from '../../components/Header'
 import StatBox from '../../components/StatBox'
 
