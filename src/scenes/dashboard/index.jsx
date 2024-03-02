@@ -54,25 +54,7 @@ const Dashboard = () => {
         gap="20px"
       >
         {/* ROW 1 */}
-        {/* <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          border="solid 5px red"
-          borderRadius="5px"
-          justifyContent="center"
-        >
-          <StatBox
-            title="Location"
-            subtitle="HJLC Petes Place BC309"
-            icon={
-              <ComputerIcon
-                sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
-              />
-            }
-          />
-        </Box> */}
+        
         <LocationBox colors={colors}></LocationBox>
 
 
