@@ -9,7 +9,6 @@ import {
   useTheme,
 } from '@mui/material'
 import { tokens } from '../../theme'
-import { mockTransactions } from '../../data/mockData'
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
 import EmailIcon from '@mui/icons-material/Email'
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale'
@@ -25,8 +24,8 @@ import SwitchLeftIcon from '@mui/icons-material/SwitchLeft'
 import SwitchRightIcon from '@mui/icons-material/SwitchRight'
 
 // Components
-import WepaTable from '../table/WepaTable'
-
+import WepaTable from './WepaTable'
+import LocationBox from './LocationBox'
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -57,38 +56,38 @@ const Dashboard = () => {
         textAlign="center"
         // border="solid 5px red"
       >
-        <Header title="NMSU Lab Crabs" subtitle="Automated WEPA Tracker" />
+        <Header title="NMSU Lab Crabs" subtitle="Automated Wepa App" />
       </Box>
 
       {/* GRID & CHARTS */}
       <Box
         display="grid"
-        // border="solid 5px red"
+        //border="solid 5px red"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="120px"
         gap="20px"
       >
         {/* ROW 1 */}
-        <Box
+        {/* <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
+          border="solid 5px red"
           borderRadius="5px"
           justifyContent="center"
         >
           <StatBox
             title="Location"
             subtitle="HJLC Petes Place BC309"
-            // progress="0.75"
-            // increase="+14%"
             icon={
               <ComputerIcon
                 sx={{ color: colors.greenAccent[600], fontSize: '26px' }}
               />
             }
           />
-        </Box>
+        </Box> */}
+        <LocationBox></LocationBox>
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
