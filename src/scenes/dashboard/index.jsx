@@ -10,7 +10,6 @@ import {
 } from '@mui/material'
 import { tokens } from '../../theme'
 import EmailIcon from '@mui/icons-material/Email'
-import PointOfSaleIcon from '@mui/icons-material/PointOfSale'
 
 
 import Header from '../../components/Header'
