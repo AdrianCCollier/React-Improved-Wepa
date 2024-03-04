@@ -13,6 +13,11 @@ import Header from '../../components/Header'
 
 import WepaTable from './WepaTable'
 import LocationBox from './LocationBox'
+import PrintTrackerBox from './PrintTrackerBox';
+import SettingsUI from '../../components/SettingsUI';
+
+
+
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -50,22 +55,34 @@ const Dashboard = () => {
         display="grid"
         //border="solid 5px red"
         gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="160"
+        gridAutoRows="140"
         gap="20px"
       >
         {/* ROW 1 */}
         
         <LocationBox colors={colors}></LocationBox>
 
-        <Box
+        {/* <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
           borderRadius="5px"
+          border="solid 5px red"
         >
           <Typography>Aggie Prints Today:</Typography>
+        </Box> */}
+        <PrintTrackerBox colors={colors}></PrintTrackerBox>
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius="5px"
+        >
+          {/* <Typography>BC Prints Today:</Typography> */}
         </Box>
         <Box
           gridColumn="span 3"
@@ -75,17 +92,7 @@ const Dashboard = () => {
           justifyContent="center"
           borderRadius="5px"
         >
-          <Typography>BC Prints Today:</Typography>
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="5px"
-        >
-          <Typography>Petes Prints Today:</Typography>
+          {/* <Typography>Petes Prints Today:</Typography> */}
         </Box>
 
         {/* ROW 2 */}
@@ -107,11 +114,8 @@ const Dashboard = () => {
           borderRadius="5px"
           backgroundColor={colors.primary[400]}
           overflow="auto"
-          // border="solid 5px red"
         >
-          <Typography variant="h3" textAlign="center">
-            Settings
-          </Typography>
+          <SettingsUI colors={colors}></SettingsUI>
         </Box>
 
         {/* ROW 3 */}
@@ -129,7 +133,7 @@ const Dashboard = () => {
             variant="h5"
             fontWeight="600"
           >
-            Birthday Tracker
+            {/* Birthday Tracker */}
           </Typography>
           <Box
             display="flex"
