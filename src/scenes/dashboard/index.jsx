@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 import {
   Box,
@@ -13,30 +13,29 @@ import Header from '../../components/Header'
 
 import WepaTable from './WepaTable'
 import LocationBox from './LocationBox'
-import PrintTrackerBox from './PrintTrackerBox';
-import SettingsUI from '../../components/SettingsUI';
-
-
+import PrintTrackerBox from './PrintTrackerBox'
+import SettingsUI from '../../components/SettingsUI'
 
 const Dashboard = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const [printerData, setPrinterData] = useState([]);
+  const theme = useTheme()
+  const colors = tokens(theme.palette.mode)
+  const [printerData, setPrinterData] = useState([])
 
   useEffect(() => {
     const fetchPrinters = async () => {
       try {
-        const response = await fetch('/printers');
-        if(!response.ok) throw new Error(`HTTP error, status: ${response.status}`);
-        const printers = await response.json();
-        setPrinterData(printers);
+        const response = await fetch('/printers')
+        if (!response.ok)
+          throw new Error(`HTTP error, status: ${response.status}`)
+        const printers = await response.json()
+        setPrinterData(printers)
       } catch (error) {
-        console.error("Failed to fetch printers: ", error);
+        console.error('Failed to fetch printers: ', error)
       }
-    };
+    }
 
-    fetchPrinters();
-  }, []);
+    fetchPrinters()
+  }, [])
 
   return (
     <Box m="20px">
@@ -59,13 +58,12 @@ const Dashboard = () => {
         gap="20px"
       >
         {/* ROW 1 */}
-        
+
         <LocationBox colors={colors}></LocationBox>
 
         {/* <Box
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
+          
           alignItems="center"
           borderRadius="5px"
           border="solid 5px red"
@@ -80,8 +78,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
           borderRadius="5px"
-        >
-        </Box>
+        ></Box>
         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -89,9 +86,7 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
           borderRadius="5px"
-        >
-
-        </Box>
+        ></Box>
 
         {/* ROW 2 */}
         <Box
@@ -121,7 +116,6 @@ const Dashboard = () => {
           gridRow="span 2"
           borderRadius="5px"
           backgroundColor={colors.primary[400]}
-
           p="30px"
         >
           <Typography
