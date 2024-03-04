@@ -124,7 +124,7 @@ const Dashboard = () => {
           gridRow="span 2"
           borderRadius="5px"
           backgroundColor={colors.primary[400]}
-          // border="solid 5px green"
+
           p="30px"
         >
           <Typography
