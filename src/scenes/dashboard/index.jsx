@@ -67,7 +67,6 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
-          justifyContent="center"
           borderRadius="5px"
           border="solid 5px red"
         >
