@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 import {
   Box,
@@ -7,35 +7,35 @@ import {
   ThemeProvider,
   Typography,
   useTheme,
-} from '@mui/material'
-import { tokens } from '../../theme'
-import Header from '../../components/Header'
+} from '@mui/material';
+import { tokens } from '../../theme';
+import Header from '../../components/Header';
 
-import WepaTable from './WepaTable'
-import LocationBox from './LocationBox'
-import PrintTrackerBox from './PrintTrackerBox'
-import SettingsUI from '../../components/SettingsUI'
+import WepaTable from './WepaTable';
+import LocationBox from './LocationBox';
+import PrintTrackerBox from './PrintTrackerBox';
+import SettingsUI from '../../components/SettingsUI';
 
 const Dashboard = () => {
-  const theme = useTheme()
-  const colors = tokens(theme.palette.mode)
-  const [printerData, setPrinterData] = useState([])
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [printerData, setPrinterData] = useState([]);
 
   useEffect(() => {
     const fetchPrinters = async () => {
       try {
-        const response = await fetch('/printers')
+        const response = await fetch('/printers');
         if (!response.ok)
-          throw new Error(`HTTP error, status: ${response.status}`)
-        const printers = await response.json()
-        setPrinterData(printers)
+          throw new Error(`HTTP error, status: ${response.status}`);
+        const printers = await response.json();
+        setPrinterData(printers);
       } catch (error) {
-        console.error('Failed to fetch printers: ', error)
+        console.error('Failed to fetch printers: ', error);
       }
-    }
+    };
 
-    fetchPrinters()
-  }, [])
+    fetchPrinters();
+  }, []);
 
   return (
     <Box m="20px">
@@ -142,7 +142,7 @@ const Dashboard = () => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
