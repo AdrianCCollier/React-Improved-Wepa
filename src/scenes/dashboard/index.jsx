@@ -82,7 +82,6 @@ const Dashboard = () => {
           justifyContent="center"
           borderRadius="5px"
         >
-          {/* <Typography>BC Prints Today:</Typography> */}
         </Box>
         <Box
           gridColumn="span 3"
