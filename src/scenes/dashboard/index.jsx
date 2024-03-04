@@ -92,7 +92,7 @@ const Dashboard = () => {
           justifyContent="center"
           borderRadius="5px"
         >
-          {/* <Typography>Petes Prints Today:</Typography> */}
+
         </Box>
 
         {/* ROW 2 */}
