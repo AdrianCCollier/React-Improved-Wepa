@@ -101,7 +101,6 @@ const Dashboard = () => {
           gridRow="span 4"
           borderRadius="5px"
           backgroundColor={colors.primary[400]}
-          // border="solid 5px red"
         >
           {/* WEPA TABLE HERE   */}
 
