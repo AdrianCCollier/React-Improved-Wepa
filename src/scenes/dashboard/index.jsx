@@ -15,6 +15,7 @@ import WepaTable from './WepaTable';
 import LocationBox from './LocationBox';
 import PrintTrackerBox from './PrintTrackerBox';
 import SettingsUI from '../../components/SettingsUI';
+import BirthdayTracker from '../../components/BirthdayTracker';
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -54,7 +55,7 @@ const Dashboard = () => {
         display="grid"
         //border="solid 5px red"
         gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="140"
+        gridAutoRows="120"
         gap="20px"
       >
         {/* ROW 1 */}
@@ -115,30 +116,12 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 2"
           borderRadius="5px"
+          // border="solid 5px red"
           backgroundColor={colors.primary[400]}
           p="30px"
         >
-          <Typography
-            textAlign="center"
-            // border="solid 5px red"
-            variant="h5"
-            fontWeight="600"
-          >
-            {/* Birthday Tracker */}
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <Typography
-              variant="h5"
-              // border="solid 5px yellow"
-              color={colors.greenAccent[500]}
-              sx={{ mt: '15px' }}
-            ></Typography>
-          </Box>
+          {/* Birthday Tracker */}
+          <BirthdayTracker></BirthdayTracker>
         </Box>
       </Box>
     </Box>
