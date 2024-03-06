@@ -41,7 +41,6 @@ const LocationBox = ({ colors }) => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      // border="solid 5px red"
       borderRadius="5px"
       p={2} // Padding for internal spacing
     >

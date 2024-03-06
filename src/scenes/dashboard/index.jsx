@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import {
   Box,
   Button,
@@ -7,7 +6,9 @@ import {
   ThemeProvider,
   Typography,
   useTheme,
+  Grid,
 } from '@mui/material';
+
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
 
@@ -53,24 +54,23 @@ const Dashboard = () => {
       {/* GRID & CHARTS */}
       <Box
         display="grid"
-        //border="solid 5px red"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="120"
         gap="20px"
       >
-        {/* ROW 1 */}
-
-        <LocationBox colors={colors}></LocationBox>
-
-        {/* <Box
-          gridColumn="span 3"
-          
-          alignItems="center"
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
           borderRadius="5px"
-          border="solid 5px red"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          flexDirection="column"
+          overflow="auto"
         >
-          <Typography>Aggie Prints Today:</Typography>
-        </Box> */}
+          <LocationBox colors={colors} />
+          <SettingsUI colors={colors} />
+        </Box>
+
         <PrintTrackerBox colors={colors}></PrintTrackerBox>
         <Box
           gridColumn="span 3"
@@ -79,15 +79,9 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
           borderRadius="5px"
-        ></Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="5px"
-        ></Box>
+        >
+          <BirthdayTracker></BirthdayTracker>
+        </Box>
 
         {/* ROW 2 */}
         <Box
@@ -101,22 +95,12 @@ const Dashboard = () => {
           {/* Passing back-end printer data as prop to child */}
           <WepaTable data={printerData}></WepaTable>
         </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          borderRadius="5px"
-          backgroundColor={colors.primary[400]}
-          overflow="auto"
-        >
-          <SettingsUI colors={colors}></SettingsUI>
-        </Box>
-
         {/* ROW 3 */}
         <Box
           gridColumn="span 4"
           gridRow="span 2"
           borderRadius="5px"
-          // border="solid 5px red"
+          border="solid 5px red"
           backgroundColor={colors.primary[400]}
           p="30px"
         >
