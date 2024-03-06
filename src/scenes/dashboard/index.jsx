@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  IconButton,
-  ThemeProvider,
-  Typography,
-  useTheme,
-  Grid,
-} from '@mui/material';
+import { Box, useTheme, Grid } from '@mui/material';
 
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
@@ -39,6 +31,18 @@ const Dashboard = () => {
     fetchPrinters();
   }, []);
 
+  const boxSx = {
+    borderRadius: '5px',
+    backgroundColor: colors.primary[400],
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    p: 2,
+    height: '100%', 
+  };
+
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -52,62 +56,50 @@ const Dashboard = () => {
       </Box>
 
       {/* GRID & CHARTS */}
-      <Box
-        display="grid"
+      <Grid
+        container
+        spacing={2}
         gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="120"
-        gap="20px"
+        gridAutoRows="auto" // Adjusted to auto for dynamic height
       >
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          borderRadius="5px"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          flexDirection="column"
-          overflow="auto"
-        >
-          <LocationBox colors={colors} />
-          <SettingsUI colors={colors} />
-        </Box>
+        {/* Combined LocationBox and SettingsUI */}
+        <Grid item xs={12} sm={6} md={3}>
+          <Box
+            borderRadius="5px"
+            backgroundColor={colors.primary[400]}
+            overflow="auto"
+          >
+            <LocationBox colors={colors} />
+            <SettingsUI colors={colors} />
+          </Box>
+        </Grid>
 
-        <PrintTrackerBox colors={colors}></PrintTrackerBox>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="5px"
-        >
-          <BirthdayTracker></BirthdayTracker>
-        </Box>
+        {/* Daily Print Tracker Box */}
+        <Grid item xs={12} sm={6} md={3}>
+          <PrintTrackerBox colors={colors} />
+        </Grid>
 
-        {/* ROW 2 */}
-        <Box
-          gridColumn="span 8"
-          gridRow="span 4"
-          borderRadius="5px"
-          backgroundColor={colors.primary[400]}
-        >
-          {/* WEPA TABLE HERE   */}
+        {/* Birthday Tracker Box */}
+        <Grid item xs={12} sm={6} md={3}>
+          <BirthdayTracker />
+        </Grid>
 
-          {/* Passing back-end printer data as prop to child */}
-          <WepaTable data={printerData}></WepaTable>
-        </Box>
-        {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          borderRadius="5px"
-          border="solid 5px red"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          {/* Birthday Tracker */}
-          <BirthdayTracker></BirthdayTracker>
-        </Box>
-      </Box>
+        {/* Empty Box */}
+        <Grid item xs={12} sm={6} md={3}>
+          <BirthdayTracker />
+        </Grid>
+
+        {/* WepaTable Full Width */}
+        <Grid item xs={12}>
+          <Box
+            borderRadius="5px"
+            backgroundColor={colors.primary[400]}
+            p="20px"
+          >
+            <WepaTable data={printerData} />
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
