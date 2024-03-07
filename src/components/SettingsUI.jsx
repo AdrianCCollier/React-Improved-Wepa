@@ -37,25 +37,28 @@ const SettingsUI = ({ colors }) => {
     <Box
       gridColumn="span 3"
       display="flex"
+      border="solid 5px red"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       p={2}
       borderRadius="5px"
-      width="100%" // Ensure the Box takes full width
+      width="100%" 
+      minHeight="200px"
     >
-      <Typography
+      {/* <Typography
         variant="h6"
         sx={{
           fontWeight: 'bold',
-          fontSize: '1.75rem',
+          fontSize: '1.25rem',
+          border: "5px solid red",
           mb: 2,
           textAlign: 'center',
           width: '100%', // Ensure Typography takes full width for proper alignment
         }}
       >
         Settings
-      </Typography>
+      </Typography> */}
 
       <Grid container spacing={2} justifyContent="center">
         {' '}
