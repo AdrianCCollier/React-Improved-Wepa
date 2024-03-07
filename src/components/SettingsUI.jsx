@@ -37,7 +37,7 @@ const SettingsUI = ({ colors }) => {
     <Box
       gridColumn="span 3"
       display="flex"
-      border="solid 5px red"
+      // border="solid 5px red"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
