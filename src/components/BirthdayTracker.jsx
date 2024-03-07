@@ -12,7 +12,7 @@ import CakeIcon from '@mui/icons-material/Cake';
 
 
 const birthdays = [
-  { name: 'Gloria', birthMonth: 'Jan', birthDay: '05' },
+  { name: 'Bel', birthMonth: 'Jan', birthDay: '05' },
   { name: 'Emma', birthMonth: 'Feb', birthDay: '12' },
   { name: 'Luis', birthMonth: 'Mar', birthDay: '19' },
   { name: 'Emma', birthMonth: 'Apr', birthDay: '26' },
