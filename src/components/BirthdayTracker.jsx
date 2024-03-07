@@ -12,11 +12,11 @@ import CakeIcon from '@mui/icons-material/Cake';
 
 
 const birthdays = [
-  { name: 'Alice', birthMonth: 'Jan', birthDay: '05' },
-  { name: 'Bob', birthMonth: 'Feb', birthDay: '12' },
-  { name: 'Charlie', birthMonth: 'Mar', birthDay: '19' },
-  { name: 'Diana', birthMonth: 'Apr', birthDay: '26' },
-  { name: 'Evan', birthMonth: 'May', birthDay: '31' },
+  { name: 'Gloria', birthMonth: 'Jan', birthDay: '05' },
+  { name: 'Emma', birthMonth: 'Feb', birthDay: '12' },
+  { name: 'Luis', birthMonth: 'Mar', birthDay: '19' },
+  { name: 'Emma', birthMonth: 'Apr', birthDay: '26' },
+  { name: 'Felix', birthMonth: 'May', birthDay: '31' },
 ];
 
 const BirthdayTracker = () => {

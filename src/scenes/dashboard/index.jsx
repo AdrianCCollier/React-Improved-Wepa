@@ -40,7 +40,7 @@ const Dashboard = () => {
     alignItems: 'center',
     justifyContent: 'center',
     p: 2,
-    height: '100%', 
+    height: '100%',
   };
 
   return (
@@ -64,11 +64,7 @@ const Dashboard = () => {
       >
         {/* Combined LocationBox and SettingsUI */}
         <Grid item xs={12} sm={6} md={3}>
-          <Box
-            borderRadius="5px"
-            backgroundColor={colors.primary[400]}
-            overflow="auto"
-          >
+          <Box sx={boxSx}>
             <LocationBox colors={colors} />
             <SettingsUI colors={colors} />
           </Box>
@@ -76,7 +72,7 @@ const Dashboard = () => {
 
         {/* Daily Print Tracker Box */}
         <Grid item xs={12} sm={6} md={3}>
-          <PrintTrackerBox colors={colors} />
+          <PrintTrackerBox colors={colors} sx={boxSx} />
         </Grid>
 
         {/* Birthday Tracker Box */}
