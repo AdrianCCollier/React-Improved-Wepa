@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import OpenInFullIcon from '@mui/icons-material/OpenInFull'
 
-
+import CustomSwitch from '../../components/CustomSwitch';
 
   const serialToLocationMapping = {
     '01041': 'Aggie, Left Kiosk',

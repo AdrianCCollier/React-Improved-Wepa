@@ -1,14 +1,24 @@
-import React from 'react'
-import './CustomSwitch.css'
+import React from 'react';
+import './CustomSwitch.css'; 
 
-const CustomSwitch = ({ checked, onChange, id }) => (
-  <div className="toggle">
-    <input type="checkbox" id={id} checked={checked} onChange={onChange} />
-    <label htmlFor={id}>
-      <span className="thumb"></span>
-    </label>
-    <div className="light"></div>
-  </div>
-);
+const CustomSwitch = ({ checked, onChange }) => {
 
-export default CustomSwitch
+  const uniqueId = `custom-switch-${Math.random().toString(36).substr(2, 9)}`;
+
+  return (
+    <div className="toggle">
+      <input
+        type="checkbox"
+        id={uniqueId}
+        checked={checked}
+        onChange={onChange}
+      />
+      <label htmlFor={uniqueId}>
+        <span className="thumb"></span>
+      </label>
+      <div className="light"></div>
+    </div>
+  );
+};
+
+export default CustomSwitch;
