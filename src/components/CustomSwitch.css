@@ -1,6 +1,6 @@
 
 :root {
-  --sz: 10vmin;
+  --sz: 12px;
   --on: #03A9F4;
   --of: #fff0;
   --gr: #666666;
@@ -51,7 +51,7 @@ input {
   display: none;
 }
 
-label[for=btn] {
+.toggle label {
   position: absolute;
   width: calc(var(--sz) * 4);
   height: calc(var(--sz) * 2);

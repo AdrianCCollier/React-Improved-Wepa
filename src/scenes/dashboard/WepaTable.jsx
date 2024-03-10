@@ -37,7 +37,7 @@ const WepaTable = ({ data }) => {
 
       const customSerial = item.name.replace('KIOSK_PROD_', '');
       const customLocation = serialToLocationMapping[customSerial] || item.location.locationDescription;
-      const notifyState = JSON.parse(localStorage.getItem(item.name));
+      const notifyState = JSON.parse(localStorage.getItem(item.name)) || false;
 
       return {
         ...item,
@@ -153,9 +153,8 @@ const WepaTable = ({ data }) => {
       if (i === index) {
         const updatedItem = {
           ...item,
-          notifications: !item.notifications, // Assuming you intend to toggle a `notifications` property
+          notifications: !item.notifications, 
         };
-        // Update Local Storage if necessary
         localStorage.setItem(
           item.serial,
           JSON.stringify(updatedItem.notifications),
@@ -164,7 +163,7 @@ const WepaTable = ({ data }) => {
       }
       return item;
     });
-    setTableData(updatedTableData); // Update tableData state with the modified array
+    setTableData(updatedTableData);
   };
 
   return (
@@ -230,7 +229,7 @@ const WepaTable = ({ data }) => {
                     }}
                   >
                     {column.id === 'notify' ? (
-                      <Switch
+                      <CustomSwitch
                         checked={row[column.id]}
                         onChange={() => handleToggleNotifications(rowIndex)}
                       />
@@ -244,7 +243,7 @@ const WepaTable = ({ data }) => {
         </TableBody>
       </Table>
     </TableContainer>
-  )
+  );
 }
 
 export default WepaTable
