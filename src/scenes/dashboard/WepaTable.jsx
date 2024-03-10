@@ -13,6 +13,8 @@ import {
 } from '@mui/material'
 import OpenInFullIcon from '@mui/icons-material/OpenInFull'
 
+
+
   const serialToLocationMapping = {
     '01041': 'Aggie, Left Kiosk',
     '01285': 'Aggie, Right Kiosk',
@@ -147,18 +149,23 @@ const WepaTable = ({ data }) => {
   }
 
   const handleToggleNotifications = (index) => {
-    const newData = data.map((item, i) => {
+    const updatedTableData = tableData.map((item, i) => {
       if (i === index) {
-        const updatedItem = { ...item, notify: !item.notify }
-        // Update Local Storage
-        localStorage.setItem(item.serial, JSON.stringify(updatedItem.notify))
-        return updatedItem
+        const updatedItem = {
+          ...item,
+          notifications: !item.notifications, // Assuming you intend to toggle a `notifications` property
+        };
+        // Update Local Storage if necessary
+        localStorage.setItem(
+          item.serial,
+          JSON.stringify(updatedItem.notifications),
+        );
+        return updatedItem;
       }
-      return item
-    })
-    console.log(newData)
-    setData(newData)
-  }
+      return item;
+    });
+    setTableData(updatedTableData); // Update tableData state with the modified array
+  };
 
   return (
     <TableContainer

@@ -37,13 +37,14 @@ const SettingsUI = ({ colors }) => {
     <Box
       gridColumn="span 3"
       display="flex"
-      border="solid 5px red"
+      backgroundColor={colors.primary[400]}
+      // border="solid 5px red"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
       p={2}
       borderRadius="5px"
-      width="100%" 
+      width="100%"
       minHeight="200px"
     >
       {/* <Typography

@@ -31,22 +31,21 @@ const Dashboard = () => {
     fetchPrinters();
   }, []);
 
-  const boxSx = {
+  const boxStyle = {
     borderRadius: '5px',
     backgroundColor: colors.primary[400],
-    overflow: 'auto',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     p: 2,
     width: '100%',
-    height: 'auto',
+    minHeight: '200px',
+    maxHeight: '500px',
   };
 
   return (
     <Box m="20px">
-      {/* HEADER */}
       <Box
         display="flex"
         alignItems="center"
@@ -56,44 +55,45 @@ const Dashboard = () => {
         <Header title="NMSU Lab Crabs" subtitle="Automated Wepa App" />
       </Box>
 
-      {/* GRID & CHARTS */}
-      <Grid
-        container
-        spacing={2}
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="auto" // Adjusted to auto for dynamic height
-      >
-        {/* Combined LocationBox and SettingsUI */}
+      <Grid container spacing={2}>
+        {/* First Row Boxes */}
         <Grid item xs={12} sm={6} md={3}>
-          <Box sx={boxSx}>
-            <LocationBox colors={colors} />
-            <SettingsUI colors={colors} />
+          <Box sx={boxStyle}>
+            {/* <LocationBox colors={colors} /> */}
           </Box>
         </Grid>
 
-        {/* Daily Print Tracker Box */}
         <Grid item xs={12} sm={6} md={3}>
-          <PrintTrackerBox colors={colors} sx={boxSx} />
+          <Box sx={boxStyle}>
+            {/* <PrintTrackerBox colors={colors} /> */}
+          </Box>
         </Grid>
 
-        {/* Birthday Tracker Box */}
         <Grid item xs={12} sm={6} md={3}>
-          <BirthdayTracker />
+          <Box sx={boxStyle}>
+            {/* <BirthdayTracker /> */}
+          </Box>
         </Grid>
 
-        {/* Empty Box */}
+        {/* This box remains as a placeholder or for future content */}
         <Grid item xs={12} sm={6} md={3}>
-          <BirthdayTracker />
+          <Box sx={boxStyle}>{/* Future content */}</Box>
         </Grid>
 
-        {/* WepaTable Full Width */}
-        <Grid item xs={12}>
-          <Box
-            borderRadius="5px"
-            backgroundColor={colors.primary[400]}
-            p="20px"
-          >
+        {/* Second Row Boxes */}
+        {/* WepaTable taking up 3 spaces */}
+        <Grid item xs={12} sm={8}>
+          <Box sx={{ ...boxStyle, minHeight: 'auto' }}>
+            {' '}
+            {/* Adjust minHeight as needed for the table */}
             <WepaTable data={printerData} />
+          </Box>
+        </Grid>
+
+        {/* SettingsUI taking up the final space */}
+        <Grid item xs={12} sm={4}>
+          <Box sx={boxStyle}>
+            <SettingsUI colors={colors} />
           </Box>
         </Grid>
       </Grid>
