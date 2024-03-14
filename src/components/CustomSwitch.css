@@ -65,7 +65,7 @@ input {
   width: calc(calc(var(--sz) * 2) - calc(var(--sz) / 8));
   height: calc(calc(var(--sz) * 2) - calc(var(--sz) / 8));
   top: calc(calc( var(--sz) / 10) + calc(var(--sz) / -20));
-  left: calc(calc( var(--sz) / 10) + calc(var(--sz) / -30));
+  /* left: calc(calc( var(--sz) / 10) + calc(var(--sz) / -30)); */
   background: 
     radial-gradient(circle at 48% 50%, #fff0 calc(var(--sz) / 1.05), var(--lg) calc(var(--sz) / 0.99) ), 
     radial-gradient(circle at 40% 50%, #fff0 calc(var(--sz) / 0.95), var(--lg) calc(var(--sz) / 0.75)), 
@@ -81,14 +81,14 @@ input {
   justify-content: center;
   z-index: 1;
   overflow: hidden;
+  transition: var(--tr);
 }
 
-#btn:checked + label .thumb {
+/* #btn:checked + label .thumb {
   --lg: var(--on);
   transition: var(--tr);
   left: calc(calc(100% - calc(calc(var(--sz) * 2) - calc(var(--sz) / 3))) - calc(calc( var(--sz) / 10) + calc(var(--sz) / 5.75)));
-
-}
+} */
 
 .thumb:before {
   content: "";

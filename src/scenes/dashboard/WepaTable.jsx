@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
   Table,
   TableBody,
@@ -10,33 +10,36 @@ import {
   Switch,
   IconButton,
   Typography,
-} from '@mui/material'
-import OpenInFullIcon from '@mui/icons-material/OpenInFull'
+} from '@mui/material';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
-import CustomSwitch from '../../components/CustomSwitch';
+// import CustomSwitch from '../../components/CustomSwitch';
 
-  const serialToLocationMapping = {
-    '01041': 'Aggie, Left Kiosk',
-    '01285': 'Aggie, Right Kiosk',
-    '00884': 'Business Complex 309',
+const serialToLocationMapping = {
+  '01041': 'Aggie, Left Kiosk',
+  '01285': 'Aggie, Right Kiosk',
+  '00884': 'Business Complex 309',
 
-    '00846': 'Zuhl, Entrance Kiosk',
-    '00912': 'Zuhl, Back Kiosk',
-    '00840': 'Petes, Left Kiosk',
-    '03332': 'Petes, Right Kiosk',
-    '00093': 'Corbett, Regular Kiosk',
-    '00685': 'Corbett, Mini Kiosk',
-  }
+  '00846': 'Zuhl, Entrance Kiosk',
+  '00912': 'Zuhl, Back Kiosk',
+  '00840': 'Petes, Left Kiosk',
+  '03332': 'Petes, Right Kiosk',
+  '00093': 'Corbett, Regular Kiosk',
+  '00685': 'Corbett, Mini Kiosk',
+};
 
 const WepaTable = ({ data }) => {
   const [isMinimized, setIsMinimized] = useState(true);
   const [tableData, setTableData] = useState([]);
 
+  const [checked, setChecked] = React.useState(false);
+
   useEffect(() => {
     const parsedData = data.map((item) => {
-
       const customSerial = item.name.replace('KIOSK_PROD_', '');
-      const customLocation = serialToLocationMapping[customSerial] || item.location.locationDescription;
+      const customLocation =
+        serialToLocationMapping[customSerial] ||
+        item.location.locationDescription;
       const notifyState = JSON.parse(localStorage.getItem(item.name)) || false;
 
       return {
@@ -60,7 +63,7 @@ const WepaTable = ({ data }) => {
 
         beltLvl: Math.floor(item.consumablesRemaining.belt),
         fuserLvl: Math.floor(item.consumablesRemaining.fuser),
-      }
+      };
     });
     setTableData(parsedData);
   }, [data]);
@@ -141,20 +144,34 @@ const WepaTable = ({ data }) => {
       label: 'Fuser %',
       alwaysVisible: isMinimized ? false : true,
     },
-  ]
+  ];
 
   const handleExpandClick = () => {
-    console.log('clicked handleExpandClick')
-    setIsMinimized(!isMinimized)
+    console.log('clicked handleExpandClick');
+    setIsMinimized(!isMinimized);
+  };
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
   }
 
   const handleToggleNotifications = (index) => {
+    console.log(`Toggling notifications for row at index: ${index}`);
+
     const updatedTableData = tableData.map((item, i) => {
       if (i === index) {
+        console.log(
+          `Before toggle, notifications for row ${index}: ${item.notifications}`,
+        );
         const updatedItem = {
           ...item,
-          notifications: !item.notifications, 
+          notifications: !item.notifications,
         };
+
+        console.log(
+          `After toggle, notifications for row ${index}: ${updatedItem.notifications}`,
+        );
+
         localStorage.setItem(
           item.serial,
           JSON.stringify(updatedItem.notifications),
@@ -164,6 +181,7 @@ const WepaTable = ({ data }) => {
       return item;
     });
     setTableData(updatedTableData);
+    console.log('Updated table data:', updatedTableData);
   };
 
   return (
@@ -229,9 +247,10 @@ const WepaTable = ({ data }) => {
                     }}
                   >
                     {column.id === 'notify' ? (
-                      <CustomSwitch
-                        checked={row[column.id]}
-                        onChange={() => handleToggleNotifications(rowIndex)}
+                      <Switch
+                        checked={checked}
+                        // onChange={() => handleToggleNotifications(rowIndex)}
+                        onChange={handleChange}
                       />
                     ) : (
                       row[column.id]
@@ -244,6 +263,6 @@ const WepaTable = ({ data }) => {
       </Table>
     </TableContainer>
   );
-}
+};
 
-export default WepaTable
+export default WepaTable;
