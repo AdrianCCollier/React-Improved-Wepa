@@ -8,7 +8,6 @@ import {
   TableRow,
   Paper,
   Switch,
-  IconButton,
 } from '@mui/material';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
