@@ -9,7 +9,6 @@ import {
   Paper,
   Switch,
   IconButton,
-  Typography,
 } from '@mui/material';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
@@ -151,7 +150,7 @@ const WepaTable = ({ data }) => {
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-  }
+  };
 
   const handleToggleNotifications = (index) => {
     console.log(`Toggling notifications for row at index: ${index}`);
