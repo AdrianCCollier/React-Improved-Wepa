@@ -16,6 +16,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
+
 const SettingsUI = ({ colors }) => {
   const [value, setValue] = React.useState(30);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -35,39 +36,39 @@ const SettingsUI = ({ colors }) => {
 
   return (
     <Box
-      gridColumn="span 3"
-      display="flex"
+      gridColumn='span 3'
+      display='flex'
       backgroundColor={colors.primary[400]}
       // border="solid 5px red"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
+      flexDirection='column'
+      alignItems='center'
+      justifyContent='center'
       p={2}
-      borderRadius="5px"
-      width="100%"
-      minHeight="200px"
+      borderRadius='5px'
+      width='100%'
+      minHeight='200px'
     >
-      {/* <Typography
-        variant="h6"
-        sx={{
-          fontWeight: 'bold',
-          fontSize: '1.25rem',
-          border: "5px solid red",
-          mb: 2,
-          textAlign: 'center',
-          width: '100%', // Ensure Typography takes full width for proper alignment
-        }}
-      >
-        Settings
-      </Typography> */}
-
-      <Grid container spacing={2} justifyContent="center">
+      <Grid container spacing={2} justifyContent='center'>
         {' '}
+        <Grid item xs={12} sm={6} md={3}>
+          <Button
+            variant='contained'
+            fullWidth // Make button expand to fill the grid item
+            sx={{
+              backgroundColor: '#2196f3',
+              '&:hover': {
+                backgroundColor: '#1769aa',
+              },
+            }}
+          >
+            Toggle Table
+          </Button>
+        </Grid>
         {/* Use Grid container here */}
         {/* Test Sound Button */}
         <Grid item xs={12} sm={6} md={3}>
           <Button
-            variant="contained"
+            variant='contained'
             fullWidth // Make button expand to fill the grid item
             sx={{
               backgroundColor: '#2196f3',
@@ -82,7 +83,7 @@ const SettingsUI = ({ colors }) => {
         {/* Select Sound Dropdown Button */}
         <Grid item xs={12} sm={6} md={3}>
           <Button
-            variant="contained"
+            variant='contained'
             fullWidth // Make button expand to fill the grid item
             sx={{
               backgroundColor: '#2196f3',
@@ -97,20 +98,6 @@ const SettingsUI = ({ colors }) => {
           </Button>
         </Grid>
         {/* Toggle Table Button */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Button
-            variant="contained"
-            fullWidth // Make button expand to fill the grid item
-            sx={{
-              backgroundColor: '#2196f3',
-              '&:hover': {
-                backgroundColor: '#1769aa',
-              },
-            }}
-          >
-            Toggle Table
-          </Button>
-        </Grid>
         {/* Volume Slider */}
         <Grid item xs={12} md={6}>
           {' '}
@@ -125,7 +112,7 @@ const SettingsUI = ({ colors }) => {
           >
             <VolumeDown />
             <Slider
-              aria-label="Volume"
+              aria-label='Volume'
               value={value}
               onChange={handleChange}
               sx={{ mx: 2, width: '80%' }}

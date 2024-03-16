@@ -3,6 +3,7 @@ import { Box, useTheme, Grid } from '@mui/material';
 
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
+import { SoundProvider } from './SoundContext';
 
 import WepaTable from './WepaTable';
 import LocationBox from './LocationBox';
@@ -45,59 +46,55 @@ const Dashboard = () => {
   };
 
   return (
-    <Box m="20px">
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        textAlign="center"
-      >
-        <Header title="NMSU Lab Crabs" subtitle="Automated Wepa App" />
+    <SoundProvider>
+      <Box m='20px'>
+        <Box
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          textAlign='center'
+        >
+          <Header title='NMSU Lab Crabs' subtitle='Automated Wepa App' />
+        </Box>
+
+        <Grid container spacing={2}>
+          {/* First Row Boxes */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{/* <LocationBox colors={colors} /> */}</Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{/* <PrintTrackerBox colors={colors} /> */}</Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{/* <BirthdayTracker /> */}</Box>
+          </Grid>
+
+          {/* This box remains as a placeholder or for future content */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{/* Future content */}</Box>
+          </Grid>
+
+          {/* Second Row Boxes */}
+          {/* WepaTable taking up 3 spaces */}
+          <Grid item xs={12} sm={8}>
+            <Box sx={{ ...boxStyle, minHeight: 'auto' }}>
+              {' '}
+              {/* Adjust minHeight as needed for the table */}
+              <WepaTable data={printerData} />
+            </Box>
+          </Grid>
+
+          {/* SettingsUI taking up the final space */}
+          <Grid item xs={12} sm={4}>
+            <Box sx={boxStyle}>
+              <SettingsUI colors={colors} />
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
-
-      <Grid container spacing={2}>
-        {/* First Row Boxes */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Box sx={boxStyle}>
-            {/* <LocationBox colors={colors} /> */}
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={3}>
-          <Box sx={boxStyle}>
-            {/* <PrintTrackerBox colors={colors} /> */}
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={3}>
-          <Box sx={boxStyle}>
-            {/* <BirthdayTracker /> */}
-          </Box>
-        </Grid>
-
-        {/* This box remains as a placeholder or for future content */}
-        <Grid item xs={12} sm={6} md={3}>
-          <Box sx={boxStyle}>{/* Future content */}</Box>
-        </Grid>
-
-        {/* Second Row Boxes */}
-        {/* WepaTable taking up 3 spaces */}
-        <Grid item xs={12} sm={8}>
-          <Box sx={{ ...boxStyle, minHeight: 'auto' }}>
-            {' '}
-            {/* Adjust minHeight as needed for the table */}
-            <WepaTable data={printerData} />
-          </Box>
-        </Grid>
-
-        {/* SettingsUI taking up the final space */}
-        <Grid item xs={12} sm={4}>
-          <Box sx={boxStyle}>
-            <SettingsUI colors={colors} />
-          </Box>
-        </Grid>
-      </Grid>
-    </Box>
+    </SoundProvider>
   );
 };
 
