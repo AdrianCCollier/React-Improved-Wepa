@@ -7,17 +7,19 @@ import {
   Slider,
   Menu,
   MenuItem,
-  Grid, // Import Grid
+  Grid,
 } from '@mui/material';
 import VolumeDown from '@mui/icons-material/VolumeDown';
-
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
+import { useSound } from '../scenes/dashboard/SoundContext';
 
 const SettingsUI = ({ colors }) => {
   const [value, setValue] = React.useState(30);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const { playSound } = useSound();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -29,6 +31,11 @@ const SettingsUI = ({ colors }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleTestSoundClick = () => {
+    console.log('Testing Sound');
+    playSound();
   };
 
   return (
@@ -66,7 +73,8 @@ const SettingsUI = ({ colors }) => {
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
-            fullWidth // Make button expand to fill the grid item
+            fullWidth
+            onClick={handleTestSoundClick}
             sx={{
               backgroundColor: '#2196f3',
               '&:hover': {
