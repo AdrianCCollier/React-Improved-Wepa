@@ -15,7 +15,6 @@ const serialToLocationMapping = {
   '01041': 'Aggie, Left Kiosk',
   '01285': 'Aggie, Right Kiosk',
   '00884': 'Business Complex 309',
-
   '00846': 'Zuhl, Entrance Kiosk',
   '00912': 'Zuhl, Back Kiosk',
   '00840': 'Petes, Left Kiosk',
@@ -27,8 +26,6 @@ const serialToLocationMapping = {
 const WepaTable = ({ data }) => {
   const [isMinimized, setIsMinimized] = useState(true);
   const [tableData, setTableData] = useState([]);
-
-  const [checked, setChecked] = React.useState(false);
 
   useEffect(() => {
     const parsedData = data.map((item) => {
@@ -64,7 +61,6 @@ const WepaTable = ({ data }) => {
     setTableData(parsedData);
   }, [data]);
 
-  // Updated columns metadata to include all ten columns with visibility control
   const columns = [
     { id: 'serial', label: 'Serial ', alwaysVisible: true },
     { id: 'location', label: 'Location', alwaysVisible: true },
@@ -147,37 +143,16 @@ const WepaTable = ({ data }) => {
     setIsMinimized(!isMinimized);
   };
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
-
   const handleToggleNotifications = (index) => {
-    console.log(`Toggling notifications for row at index: ${index}`);
-
     const updatedTableData = tableData.map((item, i) => {
       if (i === index) {
-        console.log(
-          `Before toggle, notifications for row ${index}: ${item.notifications}`,
-        );
-        const updatedItem = {
-          ...item,
-          notifications: !item.notifications,
-        };
-
-        console.log(
-          `After toggle, notifications for row ${index}: ${updatedItem.notifications}`,
-        );
-
-        localStorage.setItem(
-          item.serial,
-          JSON.stringify(updatedItem.notifications),
-        );
-        return updatedItem;
+        const updatedNotifications = !item.notifications;
+        localStorage.setItem(item.serial, JSON.stringify(updatedNotifications));
+        return { ...item, notifications: updatedNotifications };
       }
       return item;
     });
     setTableData(updatedTableData);
-    console.log('Updated table data:', updatedTableData);
   };
 
   return (
@@ -244,9 +219,8 @@ const WepaTable = ({ data }) => {
                   >
                     {column.id === 'notify' ? (
                       <Switch
-                        checked={checked}
-                        // onChange={() => handleToggleNotifications(rowIndex)}
-                        onChange={handleChange}
+                        checked={row.notifications}
+                        onChange={() => handleToggleNotifications(rowIndex)}
                       />
                     ) : (
                       row[column.id]

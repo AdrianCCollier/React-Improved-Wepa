@@ -9,7 +9,6 @@ import LocationBox from './LocationBox';
 import PrintTrackerBox from './PrintTrackerBox';
 import SettingsUI from '../../components/SettingsUI';
 import BirthdayTracker from '../../components/BirthdayTracker';
-import TestSwitch from '../../components/TestSwitch'
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -61,7 +60,6 @@ const Dashboard = () => {
         <Grid item xs={12} sm={6} md={3}>
           <Box sx={boxStyle}>
             {/* <LocationBox colors={colors} /> */}
-            <TestSwitch></TestSwitch>
           </Box>
         </Grid>
 
