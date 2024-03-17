@@ -68,7 +68,7 @@ const WepaTable = ({ data, isMinimized }) => {
     });
 
     const shouldPlaySound = parsedData.some(
-      (item) => item.notifications && ['GREEN', 'RED'].includes(item.status),
+      (item) => item.notifications && ['YELLOW', 'RED'].includes(item.status),
     );
 
     if (shouldPlaySound) {

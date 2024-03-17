@@ -4,6 +4,7 @@ import { Box, useTheme, Grid } from '@mui/material';
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
 import { SoundProvider } from './SoundContext';
+import PermissionModal from './PermissionModal';
 
 import WepaTable from './WepaTable';
 import LocationBox from './LocationBox';
@@ -14,8 +15,19 @@ import BirthdayTracker from '../../components/BirthdayTracker';
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [modalOpen, setModalOpen] = useState(true);
   const [isTableMinimized, setIsTableMinimized] = useState(true);
   const [printerData, setPrinterData] = useState([]);
+
+  const handleYes = () => {
+    console.log('User clicked yes');
+    setModalOpen(false);
+  }
+
+  const handleNo = () => {
+    console.log('User clicked No');
+    setModalOpen(false);
+  }
 
   const toggleTable = () => {
     setIsTableMinimized(!isTableMinimized);
@@ -52,6 +64,7 @@ const Dashboard = () => {
 
   return (
     <SoundProvider>
+    <PermissionModal open={modalOpen} onYes={handleYes} onNo={handleNo}></PermissionModal>
       <Box m='20px'>
         <Box
           display='flex'
