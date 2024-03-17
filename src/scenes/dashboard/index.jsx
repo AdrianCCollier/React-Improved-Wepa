@@ -14,7 +14,12 @@ import BirthdayTracker from '../../components/BirthdayTracker';
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [isTableMinimized, setIsTableMinimized] = useState(true);
   const [printerData, setPrinterData] = useState([]);
+
+  const toggleTable = () => {
+    setIsTableMinimized(!isTableMinimized);
+  };
 
   useEffect(() => {
     const fetchPrinters = async () => {
@@ -82,14 +87,14 @@ const Dashboard = () => {
             <Box sx={{ ...boxStyle, minHeight: 'auto' }}>
               {' '}
               {/* Adjust minHeight as needed for the table */}
-              <WepaTable data={printerData} />
+              <WepaTable data={printerData} isMinimized={isTableMinimized} />
             </Box>
           </Grid>
 
           {/* SettingsUI taking up the final space */}
           <Grid item xs={12} sm={4}>
             <Box sx={boxStyle}>
-              <SettingsUI colors={colors} />
+              <SettingsUI colors={colors} toggleTable={toggleTable} />
             </Box>
           </Grid>
         </Grid>

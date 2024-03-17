@@ -14,15 +14,15 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useSound } from '../scenes/dashboard/SoundContext';
 
-const SettingsUI = ({ colors }) => {
-  const [value, setValue] = React.useState(30);
+const SettingsUI = ({ colors, toggleTable }) => {
+  const { playSound, setSoundVolume, volume } = useSound();
+  const [value, setValue] = React.useState(volume * 100);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const { playSound } = useSound();
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setSoundVolume(newValue / 100);
   };
 
   const handleClick = (event) => {
@@ -57,7 +57,8 @@ const SettingsUI = ({ colors }) => {
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
-            fullWidth // Make button expand to fill the grid item
+            fullWidth
+            onClick={toggleTable}
             sx={{
               backgroundColor: '#2196f3',
               '&:hover': {

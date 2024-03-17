@@ -23,8 +23,7 @@ const serialToLocationMapping = {
   '00685': 'Corbett, Mini Kiosk',
 };
 
-const WepaTable = ({ data }) => {
-  const [isMinimized, setIsMinimized] = useState(true);
+const WepaTable = ({ data, isMinimized }) => {
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -138,10 +137,10 @@ const WepaTable = ({ data }) => {
     },
   ];
 
-  const handleExpandClick = () => {
-    console.log('clicked handleExpandClick');
-    setIsMinimized(!isMinimized);
-  };
+  // const handleExpandClick = () => {
+  //   console.log('clicked handleExpandClick');
+  //   setIsMinimized(!isMinimized);
+  // };
 
   const handleToggleNotifications = (index) => {
     const updatedTableData = tableData.map((item, i) => {
@@ -160,7 +159,7 @@ const WepaTable = ({ data }) => {
       component={Paper}
       sx={{ maxHeight: '100%', textAlign: 'right' }}
     >
-      <OpenInFullIcon
+      {/* <OpenInFullIcon
         sx={{
           mr: '5px',
           my: '-5px',
@@ -170,7 +169,7 @@ const WepaTable = ({ data }) => {
         }}
         onClick={handleExpandClick}
         aria-label="expand"
-      ></OpenInFullIcon>
+      ></OpenInFullIcon> */}
       <Table
         sx={{ minWidth: 200 }}
         size="small"
