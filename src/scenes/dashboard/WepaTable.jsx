@@ -9,7 +9,8 @@ import {
   Paper,
   Switch,
 } from '@mui/material';
-import OpenInFullIcon from '@mui/icons-material/OpenInFull';
+
+import { useSound } from './SoundContext';
 
 const serialToLocationMapping = {
   '01041': 'Aggie, Left Kiosk',
@@ -26,16 +27,21 @@ const serialToLocationMapping = {
 const WepaTable = ({ data, isMinimized }) => {
   const [tableData, setTableData] = useState([]);
 
+  const { playSound } = useSound();
+
   useEffect(() => {
     const parsedData = data.map((item) => {
       const customSerial = item.name.replace('KIOSK_PROD_', '');
       const customLocation =
         serialToLocationMapping[customSerial] ||
         item.location.locationDescription;
-      
-      
-      // Toggle State attempt
-      const notifyState = JSON.parse(localStorage.getItem(item.name)) || false;
+
+      const notificationKey = `notification_${customSerial}`;
+
+      const notifyState =
+        localStorage.getItem(notificationKey) === null
+          ? true
+          : JSON.parse(localStorage.getItem(notificationKey));
 
       return {
         ...item,
@@ -60,8 +66,17 @@ const WepaTable = ({ data, isMinimized }) => {
         fuserLvl: Math.floor(item.consumablesRemaining.fuser),
       };
     });
+
+    const shouldPlaySound = parsedData.some(
+      (item) => item.notifications && ['GREEN', 'RED'].includes(item.status),
+    );
+
+    if (shouldPlaySound) {
+      playSound();
+    }
+
     setTableData(parsedData);
-  }, [data]);
+  }, [data, playSound]);
 
   const columns = [
     { id: 'serial', label: 'Serial ', alwaysVisible: true },
@@ -144,7 +159,13 @@ const WepaTable = ({ data, isMinimized }) => {
     const updatedTableData = tableData.map((item, i) => {
       if (i === index) {
         const updatedNotifications = !item.notifications;
-        localStorage.setItem(item.serial, JSON.stringify(updatedNotifications));
+
+        const notificationKey = `notification_${item.serial}`;
+        localStorage.setItem(
+          notificationKey,
+          JSON.stringify(updatedNotifications),
+        );
+
         return { ...item, notifications: updatedNotifications };
       }
       return item;
@@ -157,21 +178,10 @@ const WepaTable = ({ data, isMinimized }) => {
       component={Paper}
       sx={{ maxHeight: '100%', textAlign: 'right' }}
     >
-      {/* <OpenInFullIcon
-        sx={{
-          mr: '5px',
-          my: '-5px',
-          cursor: 'pointer',
-          transition: 'box-shadow 0.3 ease-in-out',
-          '&:hover': { boxShadow: '0 0 8px 2px #202b46' },
-        }}
-        onClick={handleExpandClick}
-        aria-label="expand"
-      ></OpenInFullIcon> */}
       <Table
         sx={{ minWidth: 200 }}
-        size="small"
-        aria-label="WEPA table"
+        size='small'
+        aria-label='WEPA table'
         stickyHeader
       >
         <TableHead>
