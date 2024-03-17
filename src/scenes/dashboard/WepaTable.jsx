@@ -32,6 +32,9 @@ const WepaTable = ({ data, isMinimized }) => {
       const customLocation =
         serialToLocationMapping[customSerial] ||
         item.location.locationDescription;
+      
+      
+      // Toggle State attempt
       const notifyState = JSON.parse(localStorage.getItem(item.name)) || false;
 
       return {
@@ -136,11 +139,6 @@ const WepaTable = ({ data, isMinimized }) => {
       alwaysVisible: isMinimized ? false : true,
     },
   ];
-
-  // const handleExpandClick = () => {
-  //   console.log('clicked handleExpandClick');
-  //   setIsMinimized(!isMinimized);
-  // };
 
   const handleToggleNotifications = (index) => {
     const updatedTableData = tableData.map((item, i) => {
