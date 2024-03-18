@@ -24,7 +24,7 @@ const serialToLocationMapping = {
   '00685': 'Corbett, Mini Kiosk',
 };
 
-const WepaTable = ({ data, isMinimized }) => {
+const WepaTable = ({ data, isMinimized, userPermission }) => {
   const [tableData, setTableData] = useState([]);
 
   const { playSound } = useSound();
@@ -67,16 +67,8 @@ const WepaTable = ({ data, isMinimized }) => {
       };
     });
 
-    const shouldPlaySound = parsedData.some(
-      (item) => item.notifications && ['YELLOW', 'RED'].includes(item.status),
-    );
-
-    if (shouldPlaySound) {
-      playSound();
-    }
-
     setTableData(parsedData);
-  }, [data, playSound]);
+  }, [data, userPermission, playSound]);
 
   const columns = [
     { id: 'serial', label: 'Serial ', alwaysVisible: true },

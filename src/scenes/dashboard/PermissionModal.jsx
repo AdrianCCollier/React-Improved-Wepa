@@ -8,13 +8,18 @@ import {
   DialogTitle,
 } from '@mui/material';
 
-const PermissionModal = ({ open, onYes, onNo }) => {
+const PermissionModal = ({ open, onYes, onNo, colors }) => {
   return (
     <Dialog
       open={open}
       onClose={onNo}
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
+      sx={{
+        '& .MuiDialog-paper': {
+          backgroundColor: colors.primary[400],
+        },
+      }}
     >
       <DialogTitle id='alert-dialog-title'>
         {'Enable Sound Notifications?'}

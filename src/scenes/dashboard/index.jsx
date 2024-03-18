@@ -16,18 +16,21 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [modalOpen, setModalOpen] = useState(true);
+  const [userPermission, setUserPermission] = useState(false);
   const [isTableMinimized, setIsTableMinimized] = useState(true);
   const [printerData, setPrinterData] = useState([]);
 
   const handleYes = () => {
     console.log('User clicked yes');
     setModalOpen(false);
-  }
+    setUserPermission(true);
+  };
 
   const handleNo = () => {
     console.log('User clicked No');
     setModalOpen(false);
-  }
+    setUserPermission(false);
+  };
 
   const toggleTable = () => {
     setIsTableMinimized(!isTableMinimized);
@@ -64,7 +67,12 @@ const Dashboard = () => {
 
   return (
     <SoundProvider>
-    <PermissionModal open={modalOpen} onYes={handleYes} onNo={handleNo}></PermissionModal>
+      <PermissionModal
+        open={modalOpen}
+        onYes={handleYes}
+        onNo={handleNo}
+        colors={colors}
+      ></PermissionModal>
       <Box m='20px'>
         <Box
           display='flex'
@@ -100,7 +108,11 @@ const Dashboard = () => {
             <Box sx={{ ...boxStyle, minHeight: 'auto' }}>
               {' '}
               {/* Adjust minHeight as needed for the table */}
-              <WepaTable data={printerData} isMinimized={isTableMinimized} />
+              <WepaTable
+                data={printerData}
+                userPermission={userPermission}
+                isMinimized={isTableMinimized}
+              />
             </Box>
           </Grid>
 
