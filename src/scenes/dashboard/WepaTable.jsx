@@ -67,6 +67,17 @@ const WepaTable = ({ data, isMinimized, userPermission }) => {
       };
     });
 
+    if (userPermission) {
+      const shouldPlaySound = parsedData.some(
+        (printer) =>
+          printer.notifications && ['YELLOW', 'RED'].includes(printer.status),
+      );
+
+      if (shouldPlaySound) {
+        playSound();
+      }
+    }
+
     setTableData(parsedData);
   }, [data, userPermission, playSound]);
 
