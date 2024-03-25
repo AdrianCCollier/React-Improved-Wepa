@@ -27,6 +27,8 @@ const serialToLocationMapping = {
 
 const WepaTable = ({ data, isMinimized, userPermission }) => {
   const [tableData, setTableData] = useState([]);
+  const [alertModalOpen, setAlertModalOpen] = useState(false);
+  
 
   const { playSound } = useSound();
 
