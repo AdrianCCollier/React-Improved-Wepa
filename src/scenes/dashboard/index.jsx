@@ -5,6 +5,7 @@ import { tokens } from '../../theme';
 import Header from '../../components/Header';
 import { SoundProvider } from './SoundContext';
 import PermissionModal from './PermissionModal';
+import AlertModal from './AlertModal';
 
 import WepaTable from './WepaTable';
 import LocationBox from './LocationBox';
@@ -15,20 +16,23 @@ import BirthdayTracker from '../../components/BirthdayTracker';
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [modalOpen, setModalOpen] = useState(true);
+
+  const [permissionModalOpen, setPermissionModalOpen] = useState(true);
   const [userPermission, setUserPermission] = useState(false);
+
+
   const [isTableMinimized, setIsTableMinimized] = useState(true);
   const [printerData, setPrinterData] = useState([]);
 
   const handleYes = () => {
     console.log('User clicked yes');
-    setModalOpen(false);
+    setPermissionModalOpen(false);
     setUserPermission(true);
   };
 
   const handleNo = () => {
     console.log('User clicked No');
-    setModalOpen(false);
+    setPermissionModalOpen(false);
     setUserPermission(false);
   };
 
@@ -68,11 +72,12 @@ const Dashboard = () => {
   return (
     <SoundProvider>
       <PermissionModal
-        open={modalOpen}
+        open={permissionModalOpen}
         onYes={handleYes}
         onNo={handleNo}
         colors={colors}
       ></PermissionModal>
+
       <Box m='20px'>
         <Box
           display='flex'

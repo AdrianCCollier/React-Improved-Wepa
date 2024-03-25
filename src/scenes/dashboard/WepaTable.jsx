@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 
 import { useSound } from './SoundContext';
+import AlertModal from './AlertModal';
 
 const serialToLocationMapping = {
   '01041': 'Aggie, Left Kiosk',
