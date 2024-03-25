@@ -20,7 +20,7 @@ const AlertModal = ({ open, onSnooze, onDisable, colors }) => {
       }}
     >
       <DialogTitle id='alert-dialog-title'>
-        {'Enable Sound Notifications?'}
+        {'A Wepa has gone down'}
       </DialogTitle>
       <DialogActions>
         <Button onClick={onSnooze} color='primary' autoFocus>
