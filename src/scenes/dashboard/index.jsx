@@ -5,7 +5,7 @@ import { tokens } from '../../theme';
 import Header from '../../components/Header';
 import { SoundProvider } from './SoundContext';
 import PermissionModal from './PermissionModal';
-import AlertModal from './AlertModal';
+
 
 import WepaTable from './WepaTable';
 import LocationBox from './LocationBox';
