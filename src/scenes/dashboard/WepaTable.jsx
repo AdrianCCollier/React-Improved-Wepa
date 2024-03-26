@@ -39,13 +39,6 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
 
   const handleOnSnooze = () => {
     console.log('User clicked handle snooze');
-    const now = new Date();
-    const snoozeDuration = 15 * 60 * 1000;
-    const snoozeUntil = now.getTime() + snoozeDuration;
-    localStorage.setItem('snoozeUntil', snoozeUntil.toString());
-
-    console.log(`Snooze started at ${now}`);
-    console.log(`Snooze expires at: ${new Date(snoozeUntil)}`);
 
     setAlertModalOpen((prevState) => ({ ...prevState, open: false }));
     console.log(alertModalOpen);
@@ -61,10 +54,16 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
 
   useEffect(() => {
     const snoozeUntil = localStorage.getItem('snoozeUntil');
-    const now = new Date().getTime();
+    const now = new Date();
+    const nowTime = now.getTime();
 
-    if (snoozeUntil && parseInt(snoozeUntil, 10) > now) {
-      return;
+    if (snoozeUntil && parseInt(snoozeUntil, 10) > nowTime) {
+      console.log(
+        `Currently snoozed. Snooze expires at: ${new Date(parseInt(snoozeUntil, 10))}`,
+      );
+      return; // Still snoozed, don't trigger the alert
+    } else {
+      console.log('Snooze expired or not set. Current time:', now);
     }
 
     const parsedData = data.map((item) => {
@@ -104,7 +103,6 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
       };
     });
 
-    
     const printerCausingAlert = parsedData.find(
       (printer) =>
         printer.notifications && ['YELLOW', 'RED'].includes(printer.status),
@@ -112,6 +110,8 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
 
     if (printerCausingAlert && userPermission) {
       playSound();
+
+      // Construct a message with the specific printer's details
       const alertMessage = `The WEPA at ${printerCausingAlert.location} is down due to ${printerCausingAlert.statusMsg}.`;
 
       setAlertModalOpen({
