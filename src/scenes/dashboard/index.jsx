@@ -114,6 +114,7 @@ const Dashboard = () => {
               {' '}
               {/* Adjust minHeight as needed for the table */}
               <WepaTable
+                colors={colors}
                 data={printerData}
                 userPermission={userPermission}
                 isMinimized={isTableMinimized}

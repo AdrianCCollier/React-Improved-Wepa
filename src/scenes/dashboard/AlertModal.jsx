@@ -4,9 +4,19 @@ import {
   Dialog,
   DialogActions,
   DialogTitle,
+  useTheme,
 } from '@mui/material';
 
-const AlertModal = ({ open, onSnooze, onDisable, colors }) => {
+const AlertModal = ({
+  open,
+  message,
+  location,
+  statusMsg,
+  printerText,
+  onSnooze,
+  onDisable,
+}) => {
+  const theme = useTheme();
   return (
     <Dialog
       open={open}
@@ -15,19 +25,17 @@ const AlertModal = ({ open, onSnooze, onDisable, colors }) => {
       aria-describedby='alert-dialog-description'
       sx={{
         '& .MuiDialog-paper': {
-          backgroundColor: colors.primary[400],
+          backgroundColor: theme.palette.primary.main,
         },
       }}
     >
-      <DialogTitle id='alert-dialog-title'>
-        {'A Wepa has gone down'}
-      </DialogTitle>
+      <DialogTitle id='alert-dialog-title'>{message}</DialogTitle>
       <DialogActions>
         <Button onClick={onSnooze} color='primary' autoFocus>
           Snooze (15 Mins)
         </Button>
         <Button onClick={onDisable} color='primary'>
-          Turn Off Alarm 
+          Turn Off Alarm
         </Button>
       </DialogActions>
     </Dialog>

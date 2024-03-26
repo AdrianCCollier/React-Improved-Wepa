@@ -25,25 +25,48 @@ const serialToLocationMapping = {
   '00685': 'Corbett, Mini Kiosk',
 };
 
-const WepaTable = ({ data, isMinimized, userPermission }) => {
+const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
   const [tableData, setTableData] = useState([]);
-  const [alertModalOpen, setAlertModalOpen] = useState(false);
+
+  const [alertModalOpen, setAlertModalOpen] = useState({
+    open: false,
+    message: '',
+    location: '',
+    statusMsg: '',
+    printerText: '',
+  });
+  // const [alertModalOpen, setAlertModalOpen] = useState(false);
 
   const handleOnSnooze = () => {
     console.log('User clicked handle snooze');
-    setAlertModalOpen(false);
+    const now = new Date();
+    const snoozeDuration = 15 * 60 * 1000;
+    const snoozeUntil = now.getTime() + snoozeDuration;
+    localStorage.setItem('snoozeUntil', snoozeUntil.toString());
+
+    console.log(`Snooze started at ${now}`);
+    console.log(`Snooze expires at: ${new Date(snoozeUntil)}`);
+
+    setAlertModalOpen((prevState) => ({ ...prevState, open: false }));
     console.log(alertModalOpen);
   };
 
   const handleOnDisable = () => {
     console.log('User clicked handle disable');
-    setAlertModalOpen(false);
+    setAlertModalOpen((prevState) => ({ ...prevState, open: false }));
     console.log(alertModalOpen);
   };
 
   const { playSound } = useSound();
 
   useEffect(() => {
+    const snoozeUntil = localStorage.getItem('snoozeUntil');
+    const now = new Date().getTime();
+
+    if (snoozeUntil && parseInt(snoozeUntil, 10) > now) {
+      return;
+    }
+
     const parsedData = data.map((item) => {
       const customSerial = item.name.replace('KIOSK_PROD_', '');
       const customLocation =
@@ -81,16 +104,23 @@ const WepaTable = ({ data, isMinimized, userPermission }) => {
       };
     });
 
-    if (userPermission) {
-      const shouldPlaySound = parsedData.some(
-        (printer) =>
-          printer.notifications && ['GREEN', 'RED'].includes(printer.status),
-      );
+    
+    const printerCausingAlert = parsedData.find(
+      (printer) =>
+        printer.notifications && ['YELLOW', 'RED'].includes(printer.status),
+    );
 
-      if (shouldPlaySound) {
-        playSound();
-        setAlertModalOpen(true);
-      }
+    if (printerCausingAlert && userPermission) {
+      playSound();
+      const alertMessage = `The WEPA at ${printerCausingAlert.location} is down due to ${printerCausingAlert.statusMsg}.`;
+
+      setAlertModalOpen({
+        open: true,
+        message: alertMessage, // Use the dynamically created message
+        location: printerCausingAlert.location,
+        statusMsg: printerCausingAlert.statusMsg,
+        printerText: printerCausingAlert.printerText,
+      });
     }
 
     setTableData(parsedData);
@@ -259,10 +289,13 @@ const WepaTable = ({ data, isMinimized, userPermission }) => {
         </Table>
       </TableContainer>
       <AlertModal
-        open={alertModalOpen}
+        open={alertModalOpen.open}
+        message={alertModalOpen.message}
+        location={alertModalOpen.location}
+        statusMsg={alertModalOpen.statusMsg}
+        printerText={alertModalOpen.printerText}
         onSnooze={handleOnSnooze}
         onDisable={handleOnDisable}
-        colors={{ primary: { 400: '#FFEE58' } }}
       />
     </>
   );
