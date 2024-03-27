@@ -107,7 +107,7 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
     for (let printer of parsedData) {
       if (
         printer.notifications &&
-        ['GREEN', 'RED'].includes(printer.status) &&
+        ['YELLOW', 'RED'].includes(printer.status) &&
         !soundPlayed &&
         userPermission
       ) {
