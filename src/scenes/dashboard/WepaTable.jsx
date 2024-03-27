@@ -14,15 +14,15 @@ import { useSound } from './SoundContext';
 import AlertModal from './AlertModal';
 
 const serialToLocationMapping = {
-  '01041': 'Aggie, Left Kiosk',
-  '01285': 'Aggie, Right Kiosk',
-  '00884': 'Business Complex 309',
-  '00846': 'Zuhl, Entrance Kiosk',
-  '00912': 'Zuhl, Back Kiosk',
-  '00840': 'Petes, Left Kiosk',
-  '03332': 'Petes, Right Kiosk',
-  '00093': 'Corbett, Regular Kiosk',
-  '00685': 'Corbett, Mini Kiosk',
+  '01041': 'Aggie, Left WEPA',
+  '01285': 'Aggie, Right WEPA',
+  '00884': 'BC 309 WEPA',
+  '00846': 'Zuhl, Entrance WEPA',
+  '00912': 'Zuhl, Back WEPA',
+  '00840': 'Petes, Left WEPA',
+  '03332': 'Petes, Right WEPA',
+  '00093': 'Corbett, Regular WEPA',
+  '00685': 'Corbett, Mini WEPA',
 };
 
 const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
@@ -44,28 +44,26 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
     console.log(alertModalOpen);
   };
 
-  const handleOnDisable = () => {
-    console.log('User clicked handle disable');
+  const handleOnDisable = (serial) => {
+    const updatedTableData = tableData.map((item) => {
+      if (item.serial === serial) {
+        const updatedNotifications = false;
+        const notificationKey = `notification_${serial}`;
+        localStorage.setItem(
+          notificationKey,
+          JSON.stringify(updatedNotifications),
+        );
+        return { ...item, notifications: updatedNotifications };
+      }
+      return item;
+    });
+    setTableData(updatedTableData);
     setAlertModalOpen((prevState) => ({ ...prevState, open: false }));
-    console.log(alertModalOpen);
   };
 
   const { playSound } = useSound();
 
   useEffect(() => {
-    const snoozeUntil = localStorage.getItem('snoozeUntil');
-    const now = new Date();
-    const nowTime = now.getTime();
-
-    if (snoozeUntil && parseInt(snoozeUntil, 10) > nowTime) {
-      console.log(
-        `Currently snoozed. Snooze expires at: ${new Date(parseInt(snoozeUntil, 10))}`,
-      );
-      return; // Still snoozed, don't trigger the alert
-    } else {
-      console.log('Snooze expired or not set. Current time:', now);
-    }
-
     const parsedData = data.map((item) => {
       const customSerial = item.name.replace('KIOSK_PROD_', '');
       const customLocation =
@@ -103,24 +101,32 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
       };
     });
 
-    const printerCausingAlert = parsedData.find(
-      (printer) =>
-        printer.notifications && ['YELLOW', 'RED'].includes(printer.status),
-    );
+    // Boolean flag so that sound is only played once
+    let soundPlayed = false;
 
-    if (printerCausingAlert && userPermission) {
-      playSound();
+    for (let printer of parsedData) {
+      if (
+        printer.notifications &&
+        ['GREEN', 'RED'].includes(printer.status) &&
+        !soundPlayed &&
+        userPermission
+      ) {
+        playSound();
+        soundPlayed = true;
 
-      // Construct a message with the specific printer's details
-      const alertMessage = `The WEPA at ${printerCausingAlert.location} is down due to ${printerCausingAlert.statusMsg}.`;
+        const alertMessage = `The ${printer.location} is down due to ${printer.statusMsg}. \n Additional Info: ${printer.printerText}`;
 
-      setAlertModalOpen({
-        open: true,
-        message: alertMessage, // Use the dynamically created message
-        location: printerCausingAlert.location,
-        statusMsg: printerCausingAlert.statusMsg,
-        printerText: printerCausingAlert.printerText,
-      });
+        setAlertModalOpen({
+          open: true,
+          message: alertMessage,
+          location: printer.location,
+          statusMsg: printer.statusMsg,
+          printerText: printer.printerText,
+          serial: printer.serial,
+        });
+
+        break;
+      }
     }
 
     setTableData(parsedData);
@@ -294,6 +300,7 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
         location={alertModalOpen.location}
         statusMsg={alertModalOpen.statusMsg}
         printerText={alertModalOpen.printerText}
+        printerSerial={alertModalOpen.serial}
         onSnooze={handleOnSnooze}
         onDisable={handleOnDisable}
       />

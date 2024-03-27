@@ -13,6 +13,7 @@ const AlertModal = ({
   location,
   statusMsg,
   printerText,
+  printerSerial,
   onSnooze,
   onDisable,
 }) => {
@@ -34,9 +35,11 @@ const AlertModal = ({
         <Button onClick={onSnooze} color='primary' autoFocus>
           Snooze (15 Mins)
         </Button>
-        <Button onClick={onDisable} color='primary'>
-          Turn Off Alarm
+
+        <Button onClick={() => onDisable(printerSerial)} color='primary'>
+          Turn Off This Alarm
         </Button>
+
       </DialogActions>
     </Dialog>
   );
