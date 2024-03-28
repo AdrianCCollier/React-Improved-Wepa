@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import { SoundProvider } from './SoundContext';
 import PermissionModal from './PermissionModal';
 
-
+import CountdownTimer from './CountdownTimer';
 import WepaTable from './WepaTable';
 import LocationBox from './LocationBox';
 import PrintTrackerBox from './PrintTrackerBox';
@@ -17,9 +17,17 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  // Countdown timer hitting 0 logic
+  const [shouldFetchPrinters, setShouldFetchPrinters] = useState(false);
+
+  const handleCountdownComplete = () => {
+    setShouldFetchPrinters(true);
+  };
+
+
+
   const [permissionModalOpen, setPermissionModalOpen] = useState(true);
   const [userPermission, setUserPermission] = useState(false);
-
 
   const [isTableMinimized, setIsTableMinimized] = useState(true);
   const [printerData, setPrinterData] = useState([]);
@@ -114,6 +122,8 @@ const Dashboard = () => {
               {' '}
               {/* Adjust minHeight as needed for the table */}
               <WepaTable
+                shouldFetchPrinters={shouldFetchPrinters}
+                setShouldFetchPrinters={setShouldFetchPrinters}
                 colors={colors}
                 data={printerData}
                 userPermission={userPermission}
@@ -125,7 +135,7 @@ const Dashboard = () => {
           {/* SettingsUI taking up the final space */}
           <Grid item xs={12} sm={4}>
             <Box sx={boxStyle}>
-              <SettingsUI colors={colors} toggleTable={toggleTable} />
+              <SettingsUI onCountdownComplete={handleCountdownComplete} colors={colors} toggleTable={toggleTable} />
             </Box>
           </Grid>
         </Grid>

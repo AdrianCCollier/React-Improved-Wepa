@@ -9,12 +9,14 @@ import {
   MenuItem,
   Grid,
 } from '@mui/material';
+
+import CountdownTimer from '../scenes/dashboard/CountdownTimer';
 import VolumeDown from '@mui/icons-material/VolumeDown';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useSound } from '../scenes/dashboard/SoundContext';
 
-const SettingsUI = ({ colors, toggleTable }) => {
+const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
   const { playSound, setSoundVolume, volume } = useSound();
   const [value, setValue] = React.useState(volume * 100);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,7 +45,6 @@ const SettingsUI = ({ colors, toggleTable }) => {
       gridColumn='span 3'
       display='flex'
       backgroundColor={colors.primary[400]}
-      // border="solid 5px red"
       flexDirection='column'
       alignItems='center'
       justifyContent='center'
@@ -52,8 +53,23 @@ const SettingsUI = ({ colors, toggleTable }) => {
       width='100%'
       minHeight='200px'
     >
-      <Grid container spacing={2} justifyContent='center'>
-        {' '}
+      <Grid
+        container
+        spacing={2}
+        alignItems='flex-start'
+        justifyContent='flex-start'
+      >
+        {/* Countdown Timer and Active Monitoring Message */}
+        <Grid item xs={12}>
+          <Box display='flex' alignItems='center'>
+            <CountdownTimer onCountdownComplete={onCountdownComplete} />
+            <Typography variant='body2' sx={{ ml: 2 }}>
+              Live
+            </Typography>
+          </Box>
+        </Grid>
+
+        {/* Rest of the settings UI */}
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
@@ -69,6 +85,7 @@ const SettingsUI = ({ colors, toggleTable }) => {
             Toggle Table
           </Button>
         </Grid>
+
         {/* Use Grid container here */}
         {/* Test Sound Button */}
         <Grid item xs={12} sm={6} md={3}>

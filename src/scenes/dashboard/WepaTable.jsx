@@ -25,7 +25,14 @@ const serialToLocationMapping = {
   '00685': 'Corbett, Mini WEPA',
 };
 
-const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
+const WepaTable = ({
+  shouldFetchPrinters,
+  setShouldFetchPrinters,
+  colors,
+  data,
+  isMinimized,
+  userPermission,
+}) => {
   const [tableData, setTableData] = useState([]);
 
   const [alertModalOpen, setAlertModalOpen] = useState({
@@ -64,6 +71,8 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
   const { playSound } = useSound();
 
   useEffect(() => {
+    if (!shouldFetchPrinters);
+
     const parsedData = data.map((item) => {
       const customSerial = item.name.replace('KIOSK_PROD_', '');
       const customLocation =
@@ -130,7 +139,15 @@ const WepaTable = ({ colors, data, isMinimized, userPermission }) => {
     }
 
     setTableData(parsedData);
-  }, [data, userPermission, playSound]);
+
+    setShouldFetchPrinters(false);
+  }, [
+    data,
+    userPermission,
+    playSound,
+    shouldFetchPrinters,
+    setShouldFetchPrinters,
+  ]);
 
   const columns = [
     { id: 'serial', label: 'Serial ', alwaysVisible: true },
