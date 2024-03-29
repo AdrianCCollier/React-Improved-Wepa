@@ -3,7 +3,7 @@ import { CircularProgress, Box, Typography } from '@mui/material';
 
 const CountdownTimer = ( {onCountdownComplete}) => {
   const [progress, setProgress] = useState(100);
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(180);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -12,7 +12,7 @@ const CountdownTimer = ( {onCountdownComplete}) => {
           // Placeholder for API fetch logic later
           console.log('Fetching new data...');
           onCountdownComplete();
-          return 10;
+          return 180;
         }
         return prevSeconds - 1;
       });

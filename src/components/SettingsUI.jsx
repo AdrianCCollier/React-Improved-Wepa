@@ -2,25 +2,28 @@ import React from 'react';
 import {
   Box,
   Typography,
-  Button,
-  Stack,
-  Slider,
-  Menu,
-  MenuItem,
   Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Slider,
 } from '@mui/material';
+import { useSound } from '../scenes/dashboard/SoundContext';
+import sounds from '../sounds/index';
 
 import CountdownTimer from '../scenes/dashboard/CountdownTimer';
 import VolumeDown from '@mui/icons-material/VolumeDown';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-import { useSound } from '../scenes/dashboard/SoundContext';
-
 const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
-  const { playSound, setSoundVolume, volume } = useSound();
+
+
+  const {setSoundVolume, volume, setCurrentSound } = useSound();
   const [value, setValue] = React.useState(volume * 100);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
