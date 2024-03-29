@@ -3,12 +3,12 @@ import {
   Box,
   Typography,
   Grid,
-  FormControl,
-  InputLabel,
-  Select,
+  Button,
+  Menu,
   MenuItem,
   Slider,
 } from '@mui/material';
+
 import { useSound } from '../scenes/dashboard/SoundContext';
 import sounds from '../sounds/index';
 
@@ -17,25 +17,28 @@ import VolumeDown from '@mui/icons-material/VolumeDown';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
+  const { playSound, setSoundVolume, volume, setCurrentSound } = useSound();
 
-
-  const {setSoundVolume, volume, setCurrentSound } = useSound();
   const [value, setValue] = React.useState(volume * 100);
 
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    setSoundVolume(newValue / 100);
-  };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleVolumeChange = (event, newValue) => {
+    setValue(newValue);
+    setSoundVolume(newValue / 100);
+  };
+
+  const handleSoundChange = (soundKey) => {
+    setCurrentSound(soundKey);
+    handleClose();
   };
 
   const handleTestSoundClick = () => {
@@ -110,18 +113,35 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
-            fullWidth // Make button expand to fill the grid item
+            fullWidth
+            onClick={handleClick}
+            endIcon={<KeyboardArrowDownIcon />}
             sx={{
               backgroundColor: '#2196f3',
               '&:hover': {
                 backgroundColor: '#1769aa',
               },
+              marginBottom: 2,
             }}
-            onClick={handleClick}
-            endIcon={<KeyboardArrowDownIcon />}
           >
             Select Sound
           </Button>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose}
+          >
+            {Object.keys(sounds).map((soundKey) => (
+              <MenuItem
+                key={soundKey}
+                onClick={() => handleSoundChange(soundKey)}
+              >
+                {soundKey.replace(/([A-Z])/g, ' $1').trim()}{' '}
+                {/* Formatting soundKey for display */}
+              </MenuItem>
+            ))}
+          </Menu>
         </Grid>
         {/* Toggle Table Button */}
         {/* Volume Slider */}
@@ -140,7 +160,7 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
             <Slider
               aria-label='Volume'
               value={value}
-              onChange={handleChange}
+              onChange={handleVolumeChange}
               sx={{ mx: 2, width: '80%' }}
             />
           </Box>
@@ -148,19 +168,6 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
       </Grid>
 
       {/* Dropdown Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'select-sound',
-        }}
-      >
-        <MenuItem onClick={handleClose}>Sound 1</MenuItem>
-        <MenuItem onClick={handleClose}>Sound 2</MenuItem>
-        <MenuItem onClick={handleClose}>Sound 3</MenuItem>
-        <MenuItem onClick={handleClose}>More Sounds</MenuItem>
-      </Menu>
     </Box>
   );
 };

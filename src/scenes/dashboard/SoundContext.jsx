@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 import sounds from '../../sounds/index';
 
 const SoundContext = createContext();
@@ -11,17 +17,19 @@ export const SoundProvider = ({ children }) => {
 
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [currentSound, setCurrentSound] = useState('defaultSound');
-  const [audio, setAudio] = useState(new Audio(sounds[currentSound]));
+  const audioRef = useRef(new Audio(sounds[currentSound]));
 
   useEffect(() => {
-    setAudio(new Audio(sounds[currentSound]));
-  }, [currentSound]);
-
-  const toggleSound = () => setSoundEnabled(!soundEnabled);
+    audioRef.current.volume = volume;
+  }, [volume]);
 
   const playSound = () => {
     if (soundEnabled) {
-      audio.currentTime = 0;
+      let audio = audioRef.current;
+      if (!audio.paused) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
       audio
         .play()
         .catch((error) => console.error('Error playing sound:', error));
@@ -31,18 +39,28 @@ export const SoundProvider = ({ children }) => {
   const setSoundVolume = (newVolume) => {
     setVolume(newVolume);
     localStorage.setItem('volume', newVolume.toString());
-    audio.volume = newVolume;
   };
+
+  const handleSetCurrentSound = (soundKey) => {
+    if (sounds[soundKey]) {
+      audioRef.current.pause();
+      audioRef.current = new Audio(sounds[soundKey]);
+      audioRef.current.volume = volume;
+      setCurrentSound(soundKey);
+    }
+  };
+
+  const toggleSound = () => setSoundEnabled(!soundEnabled);
 
   return (
     <SoundContext.Provider
       value={{
         soundEnabled,
-        toggleSound,
+        toggleSound: () => setSoundEnabled(!soundEnabled),
         playSound,
         setSoundVolume,
         volume,
-        setCurrentSound,
+        setCurrentSound: handleSetCurrentSound,
       }}
     >
       {children}
