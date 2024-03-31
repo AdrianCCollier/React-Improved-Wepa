@@ -14,9 +14,13 @@ export const SoundProvider = ({ children }) => {
     const savedVolume = localStorage.getItem('volume');
     return savedVolume !== null ? parseFloat(savedVolume) : 0.5;
   });
-
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [currentSound, setCurrentSound] = useState('defaultSound');
+
+  const [currentSound, setCurrentSound] = useState(() => {
+    const savedSound = localStorage.getItem('currentSound');
+    return savedSound && sounds[savedSound] ? savedSound : 'defaultSound';
+  });
+
   const audioRef = useRef(new Audio(sounds[currentSound]));
 
   useEffect(() => {
@@ -43,6 +47,7 @@ export const SoundProvider = ({ children }) => {
 
   const handleSetCurrentSound = (soundKey) => {
     if (sounds[soundKey]) {
+      localStorage.setItem('currentSound', soundKey);
       audioRef.current.pause();
       audioRef.current = new Audio(sounds[soundKey]);
       audioRef.current.volume = volume;

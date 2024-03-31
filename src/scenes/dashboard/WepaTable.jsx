@@ -42,7 +42,8 @@ const WepaTable = ({
     statusMsg: '',
     printerText: '',
   });
-  // const [alertModalOpen, setAlertModalOpen] = useState(false);
+
+    const { playSound } = useSound();
 
   const handleOnSnooze = () => {
     console.log('User clicked handle snooze');
@@ -68,10 +69,11 @@ const WepaTable = ({
     setAlertModalOpen((prevState) => ({ ...prevState, open: false }));
   };
 
-  const { playSound } = useSound();
+
 
   useEffect(() => {
     if (!shouldFetchPrinters);
+    // return;
 
     const parsedData = data.map((item) => {
       const customSerial = item.name.replace('KIOSK_PROD_', '');
@@ -142,10 +144,10 @@ const WepaTable = ({
 
     setShouldFetchPrinters(false);
   }, [
-    data,
-    userPermission,
-    playSound,
     shouldFetchPrinters,
+    data,
+    playSound,
+    userPermission,
     setShouldFetchPrinters,
   ]);
 
