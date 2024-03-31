@@ -43,7 +43,7 @@ const WepaTable = ({
     printerText: '',
   });
 
-    const { playSound } = useSound();
+  const { playSound } = useSound();
 
   const handleOnSnooze = () => {
     console.log('User clicked handle snooze');
@@ -69,12 +69,7 @@ const WepaTable = ({
     setAlertModalOpen((prevState) => ({ ...prevState, open: false }));
   };
 
-
-
   useEffect(() => {
-    if (!shouldFetchPrinters);
-    // return;
-
     const parsedData = data.map((item) => {
       const customSerial = item.name.replace('KIOSK_PROD_', '');
       const customLocation =
@@ -112,10 +107,15 @@ const WepaTable = ({
       };
     });
 
-    // Boolean flag so that sound is only played once
+    setTableData(parsedData);
+  }, [data]);
+
+  useEffect(() => {
+    if (!shouldFetchPrinters) return;
+
     let soundPlayed = false;
 
-    for (let printer of parsedData) {
+    for (let printer of tableData) {
       if (
         printer.notifications &&
         ['YELLOW', 'RED'].includes(printer.status) &&
@@ -135,19 +135,15 @@ const WepaTable = ({
           printerText: printer.printerText,
           serial: printer.serial,
         });
-
         break;
       }
     }
-
-    setTableData(parsedData);
-
     setShouldFetchPrinters(false);
   }, [
     shouldFetchPrinters,
-    data,
-    playSound,
+    tableData,
     userPermission,
+    playSound,
     setShouldFetchPrinters,
   ]);
 
