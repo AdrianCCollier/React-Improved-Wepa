@@ -43,13 +43,14 @@ const WepaTable = ({
     printerText: '',
   });
 
-  const { playSound } = useSound();
+  const { playSound, stopSound } = useSound();
 
   const handleOnSnooze = () => {
     console.log('User clicked handle snooze');
 
     setAlertModalOpen((prevState) => ({ ...prevState, open: false }));
     console.log(alertModalOpen);
+    stopSound();
   };
 
   const handleOnDisable = (serial) => {
@@ -63,6 +64,9 @@ const WepaTable = ({
         );
         return { ...item, notifications: updatedNotifications };
       }
+
+      stopSound();
+
       return item;
     });
     setTableData(updatedTableData);
@@ -118,7 +122,7 @@ const WepaTable = ({
     for (let printer of tableData) {
       if (
         printer.notifications &&
-        ['YELLOW', 'RED'].includes(printer.status) &&
+        ['GREEN', 'RED'].includes(printer.status) &&
         !soundPlayed &&
         userPermission
       ) {

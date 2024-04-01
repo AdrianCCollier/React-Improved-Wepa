@@ -15,11 +15,10 @@ const CountdownTimer = ({ onCountdownComplete }) => {
 
   useEffect(() => {
     if (seconds <= 0) {
-      onCountdownComplete(); // Trigger the completion action
-      setSeconds(10); // Reset for next countdown, adjust as needed for your case
+      onCountdownComplete();
+      setSeconds(10);
     }
-    // This also updates the progress as the seconds change
-    setProgress((seconds / 10) * 100); // Adjust the denominator as needed
+    setProgress((seconds / 10) * 100);
   }, [seconds, onCountdownComplete]);
 
   return (

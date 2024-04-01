@@ -23,6 +23,13 @@ export const SoundProvider = ({ children }) => {
 
   const audioRef = useRef(new Audio(sounds[currentSound]));
 
+  const stopSound = () => {
+    if(audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }
+
   useEffect(() => {
     audioRef.current.volume = volume;
   }, [volume]);
@@ -63,6 +70,7 @@ export const SoundProvider = ({ children }) => {
         soundEnabled,
         toggleSound: () => setSoundEnabled(!soundEnabled),
         playSound,
+        stopSound,
         setSoundVolume,
         volume,
         setCurrentSound: handleSetCurrentSound,
