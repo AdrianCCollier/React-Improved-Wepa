@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
+
 import {
   Table,
   TableBody,
@@ -8,56 +8,17 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Switch,
 } from '@mui/material';
 
 import { useSound } from './SoundContext';
 import AlertModal from './AlertModal';
-
-const CustomSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-switchBase.Mui-checked': {
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    },
-  },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: '#007FFF',
-  },
-  '& .MuiSwitch-switchBase': {
-    color: '#767676',
-    '&:hover': {
-      backgroundColor: 'rgba(118, 118, 118, 0.1)',
-    },
-  },
-  '& .MuiSwitch-track': {
-    backgroundColor: '#bdbdbd',
-  },
-}));
-
-const serialToLocationMapping = {
-  '01041': 'Aggie, Left WEPA',
-  '01285': 'Aggie, Right WEPA',
-  '00846': 'Zuhl, Entrance WEPA',
-  '00912': 'Zuhl, Back WEPA',
-  '00884': 'BC 309 WEPA',
-  '00093': 'Corbett, Regular WEPA',
-  '00685': 'Corbett, Mini WEPA',
-  '00840': 'Petes, Left WEPA',
-  '03332': 'Petes, Right WEPA',
-};
-
-const locationOrder = [
-  'Aggie, Left WEPA',
-  'Aggie, Right WEPA',
-  'Zuhl, Entrance WEPA',
-  'Zuhl, Back WEPA',
-  'BC 309 WEPA',
-  'Corbett, Regular WEPA',
-  'Corbett, Mini WEPA',
-  'Petes, Left WEPA',
-  'Petes, Right WEPA',
-];
+import CustomSwitch from '../../components/CustomSwitch';
+import TableHeader from '../../components/TableHeader';
+import {
+  getTableColumns,
+  serialToLocationMapping,
+  locationOrder,
+} from '../../components/TableDataUtils';
 
 const WepaTable = ({
   shouldFetchPrinters,
@@ -78,6 +39,8 @@ const WepaTable = ({
   });
 
   const { playSound, stopSound } = useSound();
+
+  const columns = getTableColumns(isMinimized);
 
   const handleOnSnooze = () => {
     console.log('User clicked handle snooze');
@@ -191,83 +154,6 @@ const WepaTable = ({
     setShouldFetchPrinters,
   ]);
 
-  const columns = [
-    { id: 'serial', label: 'Serial ', alwaysVisible: true },
-    { id: 'location', label: 'Location', alwaysVisible: true },
-    { id: 'status', label: 'Status', alwaysVisible: true },
-    { id: 'notify', label: 'Notifications', alwaysVisible: true },
-    {
-      id: 'statusMsg',
-      label: 'Status Msg',
-      alwaysVisible: isMinimized ? false : true,
-    },
-    {
-      id: 'printerText',
-      label: 'Printer Text',
-      alwaysVisible: isMinimized ? false : true,
-    },
-    {
-      id: 'tonerBlack',
-      label: 'B',
-      partOf: 'tonerLvl',
-      alwaysVisible: !isMinimized,
-    },
-    {
-      id: 'tonerCyan',
-      label: 'C',
-      partOf: 'tonerLvl',
-      alwaysVisible: !isMinimized,
-    },
-    {
-      id: 'tonerMagenta',
-      label: 'M',
-      partOf: 'tonerLvl',
-      alwaysVisible: !isMinimized,
-    },
-    {
-      id: 'tonerYellow',
-      label: 'Y',
-      partOf: 'tonerLvl',
-      alwaysVisible: !isMinimized,
-    },
-
-    {
-      id: 'drumBlack',
-      label: 'B',
-      partOf: 'drumLvl',
-      alwaysVisible: !isMinimized,
-    },
-    {
-      id: 'drumCyan',
-      label: 'C',
-      partOf: 'drumLvl',
-      alwaysVisible: !isMinimized,
-    },
-    {
-      id: 'drumMagenta',
-      label: 'M',
-      partOf: 'drumLvl',
-      alwaysVisible: !isMinimized,
-    },
-    {
-      id: 'drumYellow',
-      label: 'Y',
-      partOf: 'drumLvl',
-      alwaysVisible: !isMinimized,
-    },
-
-    {
-      id: 'beltLvl',
-      label: 'Belt %',
-      alwaysVisible: isMinimized ? false : true,
-    },
-    {
-      id: 'fuserLvl',
-      label: 'Fuser %',
-      alwaysVisible: isMinimized ? false : true,
-    },
-  ];
-
   const handleToggleNotifications = (index) => {
     const updatedTableData = tableData.map((item, i) => {
       if (i === index) {
@@ -298,26 +184,8 @@ const WepaTable = ({
           aria-label='WEPA table'
           stickyHeader
         >
-          <TableHead>
-            <TableRow>
-              {columns
-                .filter((column) => column.alwaysVisible || !isMinimized)
-                .map((column) => (
-                  <TableCell
-                    key={column.id}
-                    sx={{
-                      py: 0.5,
-                      px: 1,
-                      fontSize: '0.875rem',
-                      fontWeight: 'bold',
-                      backgroundColor: '#202b46',
-                    }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-            </TableRow>
-          </TableHead>
+          <TableHeader isMinimized={isMinimized}></TableHeader>
+
           <TableBody>
             {tableData.map((row, rowIndex) => (
               <TableRow
@@ -335,7 +203,7 @@ const WepaTable = ({
                       sx={{
                         py: 0.5,
                         px: 1,
-                        fontSize: '0.775rem',
+                        fontSize: '0.875rem',
                       }}
                     >
                       {column.id === 'notify' ? (
