@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Table,
   TableBody,
@@ -13,17 +14,50 @@ import {
 import { useSound } from './SoundContext';
 import AlertModal from './AlertModal';
 
+const CustomSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: '#007FFF',
+  },
+  '& .MuiSwitch-switchBase': {
+    color: '#767676',
+    '&:hover': {
+      backgroundColor: 'rgba(118, 118, 118, 0.1)',
+    },
+  },
+  '& .MuiSwitch-track': {
+    backgroundColor: '#bdbdbd',
+  },
+}));
+
 const serialToLocationMapping = {
   '01041': 'Aggie, Left WEPA',
   '01285': 'Aggie, Right WEPA',
-  '00884': 'BC 309 WEPA',
   '00846': 'Zuhl, Entrance WEPA',
   '00912': 'Zuhl, Back WEPA',
-  '00840': 'Petes, Left WEPA',
-  '03332': 'Petes, Right WEPA',
+  '00884': 'BC 309 WEPA',
   '00093': 'Corbett, Regular WEPA',
   '00685': 'Corbett, Mini WEPA',
+  '00840': 'Petes, Left WEPA',
+  '03332': 'Petes, Right WEPA',
 };
+
+const locationOrder = [
+  'Aggie, Left WEPA',
+  'Aggie, Right WEPA',
+  'Zuhl, Entrance WEPA',
+  'Zuhl, Back WEPA',
+  'BC 309 WEPA',
+  'Corbett, Regular WEPA',
+  'Corbett, Mini WEPA',
+  'Petes, Left WEPA',
+  'Petes, Right WEPA',
+];
 
 const WepaTable = ({
   shouldFetchPrinters,
@@ -111,7 +145,13 @@ const WepaTable = ({
       };
     });
 
-    setTableData(parsedData);
+    const sortedData = parsedData.sort((a, b) => {
+      return (
+        locationOrder.indexOf(a.location) - locationOrder.indexOf(b.location)
+      );
+    });
+
+    setTableData(sortedData);
   }, [data]);
 
   useEffect(() => {
@@ -122,7 +162,7 @@ const WepaTable = ({
     for (let printer of tableData) {
       if (
         printer.notifications &&
-        ['GREEN', 'RED'].includes(printer.status) &&
+        ['YELLOW', 'RED'].includes(printer.status) &&
         !soundPlayed &&
         userPermission
       ) {
@@ -299,7 +339,7 @@ const WepaTable = ({
                       }}
                     >
                       {column.id === 'notify' ? (
-                        <Switch
+                        <CustomSwitch
                           checked={row.notifications}
                           onChange={() => handleToggleNotifications(rowIndex)}
                         />
