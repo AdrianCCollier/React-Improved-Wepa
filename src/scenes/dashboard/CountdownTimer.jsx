@@ -3,7 +3,10 @@ import { CircularProgress, Box, Typography } from '@mui/material';
 
 const CountdownTimer = ({ onCountdownComplete }) => {
   const [progress, setProgress] = useState(100);
-  const [seconds, setSeconds] = useState(10);
+  const [initialSeconds, setInitialSeconds] = useState(10);
+  const [regularSeconds, setRegularSeconds] = useState(120);
+  const [seconds, setSeconds] = useState(initialSeconds);
+  const [isInitialCheck, setInitialCheck] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,10 +19,20 @@ const CountdownTimer = ({ onCountdownComplete }) => {
   useEffect(() => {
     if (seconds <= 0) {
       onCountdownComplete();
-      setSeconds(10);
+      if (isInitialCheck) {
+        setSeconds(regularSeconds);
+        setInitialCheck(false);
+      } else {
+        setSeconds(regularSeconds);
+      }
     }
-    setProgress((seconds / 10) * 100);
-  }, [seconds, onCountdownComplete]);
+
+    const currentTotalSeconds = isInitialCheck
+      ? initialSeconds
+      : regularSeconds;
+
+    setProgress((seconds / currentTotalSeconds) * 100);
+  }, [seconds, isInitialCheck, onCountdownComplete]);
 
   return (
     <Box position='relative' display='inline-flex'>
