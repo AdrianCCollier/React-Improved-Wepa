@@ -65,7 +65,6 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
         alignItems='flex-start'
         justifyContent='flex-start'
       >
-        {/* Countdown Timer and Active Monitoring Message */}
         <Grid item xs={12}>
           <Box display='flex' alignItems='center'>
             <CountdownTimer onCountdownComplete={onCountdownComplete} />
@@ -74,7 +73,6 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
             </Typography>
           </Box>
         </Grid>
-
 
         <Grid item xs={12} sm={6} md={3}>
           <Button
@@ -92,7 +90,6 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
           </Button>
         </Grid>
 
-       
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
@@ -108,7 +105,7 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
             Test Sound
           </Button>
         </Grid>
- 
+
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
@@ -137,15 +134,13 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
                 onClick={() => handleSoundChange(soundKey)}
               >
                 {soundKey.replace(/([A-Z])/g, ' $1').trim()}{' '}
-             
               </MenuItem>
             ))}
           </Menu>
         </Grid>
-     
+
         <Grid item xs={12} md={6}>
           {' '}
-        
           <Box
             sx={{
               width: '100%',
