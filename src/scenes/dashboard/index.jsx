@@ -6,7 +6,6 @@ import Header from '../../components/Header';
 import { SoundProvider } from './SoundContext';
 import BeginButton from './BeginButton';
 
-import CountdownTimer from './CountdownTimer';
 import WepaTable from './WepaTable';
 import LocationBox from './LocationBox';
 import PrintTrackerBox from './PrintTrackerBox';
@@ -20,21 +19,21 @@ const Dashboard = () => {
   // Countdown timer hitting 0 logic
   const [shouldFetchPrinters, setShouldFetchPrinters] = useState(false);
 
+  const [startCountdown, setStartCountdown] = useState(false);
+
   const handleCountdownComplete = () => {
     setShouldFetchPrinters(true);
   };
-
 
   const [userPermission, setUserPermission] = useState(false);
 
   const [isTableMinimized, setIsTableMinimized] = useState(true);
   const [printerData, setPrinterData] = useState([]);
 
-
-
   const beginMonitoring = () => {
     console.log('Monitoring has started');
     setUserPermission(true);
+    setStartCountdown(true);
   };
 
   const toggleTable = () => {
@@ -70,23 +69,22 @@ const Dashboard = () => {
     maxHeight: '500px',
   };
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400, 
-  bgcolor: 'background.paper',
-  boxShadow: '0px 7px 30px rgba(0, 0, 0, 0.2)',
-  p: 4,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '10px',
-  outline: 'none', 
-
-};
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: '0px 7px 30px rgba(0, 0, 0, 0.2)',
+    p: 4,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+    outline: 'none',
+  };
 
   return (
     <SoundProvider>
@@ -96,7 +94,6 @@ const modalStyle = {
         aria-labelledby='monitoring-modal-title'
         aria-describedby='monitoring-modal-description'
         closeAfterTransition
-
       >
         <Box sx={modalStyle}>
           <BeginButton onBegin={beginMonitoring} />
@@ -156,6 +153,7 @@ const modalStyle = {
                 onCountdownComplete={handleCountdownComplete}
                 colors={colors}
                 toggleTable={toggleTable}
+                startCountdown={startCountdown}
               />
             </Box>
           </Grid>

@@ -11,12 +11,17 @@ import {
 
 import { useSound } from '../scenes/dashboard/SoundContext';
 import sounds from '../sounds/index';
-
+import BeginButton from '../scenes/dashboard/BeginButton';
 import CountdownTimer from '../scenes/dashboard/CountdownTimer';
 import VolumeDown from '@mui/icons-material/VolumeDown';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
+const SettingsUI = ({
+  onCountdownComplete,
+  colors,
+  toggleTable,
+  startCountdown,
+}) => {
   const { playSound, setSoundVolume, volume, setCurrentSound } = useSound();
 
   const [value, setValue] = React.useState(volume * 100);
@@ -67,10 +72,11 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
       >
         <Grid item xs={12}>
           <Box display='flex' alignItems='center'>
-            <CountdownTimer onCountdownComplete={onCountdownComplete} />
-            <Typography variant='body2' sx={{ ml: 2 }}>
-              Live
-            </Typography>
+            <CountdownTimer
+              onCountdownComplete={onCountdownComplete}
+              startCountdown={startCountdown}
+            />
+            <Typography variant='body2' sx={{ ml: 2 }}></Typography>
           </Box>
         </Grid>
 
