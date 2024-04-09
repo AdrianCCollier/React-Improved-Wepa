@@ -143,11 +143,10 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
             ))}
           </Menu>
         </Grid>
-        {/* Toggle Table Button */}
-        {/* Volume Slider */}
+     
         <Grid item xs={12} md={6}>
           {' '}
-          {/* Adjust grid sizing based on your preference */}
+        
           <Box
             sx={{
               width: '100%',
@@ -166,8 +165,6 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
           </Box>
         </Grid>
       </Grid>
-
-      {/* Dropdown Menu */}
     </Box>
   );
 };
