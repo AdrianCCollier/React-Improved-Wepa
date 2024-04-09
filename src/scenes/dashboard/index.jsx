@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, useTheme, Grid } from '@mui/material';
+import { Box, Modal, useTheme, Grid } from '@mui/material';
 
 import { tokens } from '../../theme';
 import Header from '../../components/Header';
 import { SoundProvider } from './SoundContext';
-import PermissionModal from './PermissionModal';
+import BeginButton from './BeginButton';
 
 import CountdownTimer from './CountdownTimer';
 import WepaTable from './WepaTable';
@@ -25,23 +25,16 @@ const Dashboard = () => {
   };
 
 
-
-  const [permissionModalOpen, setPermissionModalOpen] = useState(true);
   const [userPermission, setUserPermission] = useState(false);
 
   const [isTableMinimized, setIsTableMinimized] = useState(true);
   const [printerData, setPrinterData] = useState([]);
 
-  const handleYes = () => {
-    console.log('User clicked yes');
-    setPermissionModalOpen(false);
-    setUserPermission(true);
-  };
 
-  const handleNo = () => {
-    console.log('User clicked No');
-    setPermissionModalOpen(false);
-    setUserPermission(false);
+
+  const beginMonitoring = () => {
+    console.log('Monitoring has started');
+    setUserPermission(true);
   };
 
   const toggleTable = () => {
@@ -77,16 +70,40 @@ const Dashboard = () => {
     maxHeight: '500px',
   };
 
+const modalStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400, 
+  bgcolor: 'background.paper',
+  boxShadow: '0px 7px 30px rgba(0, 0, 0, 0.2)',
+  p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '10px',
+  outline: 'none', 
+
+};
+
   return (
     <SoundProvider>
-      <PermissionModal
-        open={permissionModalOpen}
-        onYes={handleYes}
-        onNo={handleNo}
-        colors={colors}
-      ></PermissionModal>
+      <Modal
+        open={!userPermission}
+        onClose={() => setUserPermission(true)}
+        aria-labelledby='monitoring-modal-title'
+        aria-describedby='monitoring-modal-description'
+        closeAfterTransition
 
-      <Box m='20px'>
+      >
+        <Box sx={modalStyle}>
+          <BeginButton onBegin={beginMonitoring} />
+        </Box>
+      </Modal>
+
+      <Box m='20px' opacity={userPermission ? '100%' : '0%'}>
         <Box
           display='flex'
           alignItems='center'
@@ -135,7 +152,11 @@ const Dashboard = () => {
           {/* SettingsUI taking up the final space */}
           <Grid item xs={12} sm={4}>
             <Box sx={boxStyle}>
-              <SettingsUI onCountdownComplete={handleCountdownComplete} colors={colors} toggleTable={toggleTable} />
+              <SettingsUI
+                onCountdownComplete={handleCountdownComplete}
+                colors={colors}
+                toggleTable={toggleTable}
+              />
             </Box>
           </Grid>
         </Grid>
