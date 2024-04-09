@@ -75,7 +75,7 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
           </Box>
         </Grid>
 
-        {/* Rest of the settings UI */}
+
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
@@ -92,8 +92,7 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
           </Button>
         </Grid>
 
-        {/* Use Grid container here */}
-        {/* Test Sound Button */}
+       
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
@@ -109,7 +108,7 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
             Test Sound
           </Button>
         </Grid>
-        {/* Select Sound Dropdown Button */}
+ 
         <Grid item xs={12} sm={6} md={3}>
           <Button
             variant='contained'
@@ -138,7 +137,7 @@ const SettingsUI = ({ onCountdownComplete, colors, toggleTable }) => {
                 onClick={() => handleSoundChange(soundKey)}
               >
                 {soundKey.replace(/([A-Z])/g, ' $1').trim()}{' '}
-                {/* Formatting soundKey for display */}
+             
               </MenuItem>
             ))}
           </Menu>
