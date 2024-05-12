@@ -132,7 +132,8 @@ const WepaTable = ({
         playSound();
         soundPlayed = true;
 
-        const alertMessage = `The ${printer.location} is down due to ${printer.statusMsg}. \n Additional Info: ${printer.printerText}`;
+        // const alertMessage = `The ${printer.location} is down due to ${printer.statusMsg}. \n Additional Info: ${printer.printerText}`;
+        const alertMessage = `The ${printer.location} is down.`;
 
         setAlertModalOpen({
           open: true,
@@ -176,10 +177,10 @@ const WepaTable = ({
     <>
       <TableContainer
         component={Paper}
-        sx={{ maxHeight: '100%', textAlign: 'right' }}
+        sx={{ maxHeight: '100%', textAlign: 'center'}}
       >
         <Table
-          sx={{ minWidth: 200 }}
+          sx={{ width: '100%', minWidth: 200}}
           size='small'
           aria-label='WEPA table'
           stickyHeader
@@ -201,13 +202,16 @@ const WepaTable = ({
                     <TableCell
                       key={column.id}
                       sx={{
-                        py: 0.5,
-                        px: 1,
+                        py: 0.3,
+                        px: 0.3,
                         fontSize: '0.875rem',
+                        // border: '5px solid red',
+                        textAlign: 'center',
                       }}
                     >
                       {column.id === 'notify' ? (
                         <CustomSwitch
+                      
                           checked={row.notifications}
                           onChange={() => handleToggleNotifications(rowIndex)}
                         />
