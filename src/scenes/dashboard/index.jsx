@@ -111,23 +111,23 @@ const Dashboard = () => {
         </Box>
 
         <Grid container spacing={2}>
-          {/* First Row Boxes */}
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={boxStyle}>{/* <LocationBox colors={colors} /> */}</Box>
-          </Grid>
+         
+          {/* <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{}</Box>
+          </Grid> */}
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={boxStyle}>{/* <PrintTrackerBox colors={colors} /> */}</Box>
-          </Grid>
+          {/* <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{}</Box>
+          </Grid> */}
 
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={boxStyle}>{/* <BirthdayTracker /> */}</Box>
-          </Grid>
+          {/* <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{}</Box>
+          </Grid> */}
 
           {/* This box remains as a placeholder or for future content */}
-          <Grid item xs={12} sm={6} md={3}>
-            <Box sx={boxStyle}>{/* Future content */}</Box>
-          </Grid>
+          {/* <Grid item xs={12} sm={6} md={3}>
+            <Box sx={boxStyle}>{}</Box>
+          </Grid> */}
 
           {/* Second Row Boxes */}
           {/* WepaTable taking up 3 spaces */}
@@ -157,6 +157,8 @@ const Dashboard = () => {
               />
             </Box>
           </Grid>
+
+          
         </Grid>
       </Box>
     </SoundProvider>
