@@ -7,7 +7,7 @@ const TableHeader = ({ isMinimized }) => {
   const columns = getTableColumns(isMinimized);
 
 
-  const visibleColumns = isMinimized ? columns.slice(0, 6) : columns;
+  const visibleColumns = isMinimized ? columns.slice(0, 5) : columns;
 
 
   const groupedColumns = {};

@@ -35,11 +35,6 @@ export const getTableColumns = (isMinimized) => [
     alwaysVisible: true,
   },
   {
-    id: 'lowestSupplies',
-    label: 'Lowest Supplies',
-    alwaysVisible: true,
-  },
-  {
     id: 'printerText',
     label: 'Printer Text',
     alwaysVisible: isMinimized ? false : true,

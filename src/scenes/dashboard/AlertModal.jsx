@@ -33,7 +33,8 @@ const AlertModal = ({
       <DialogTitle id='alert-dialog-title'>{message}</DialogTitle>
       <DialogActions>
         <Button onClick={onSnooze} color='primary' autoFocus>
-          Snooze (15 Mins)
+          {/* Snooze (15 Mins) */}
+          Ok
         </Button>
 
         <Button onClick={() => onDisable(printerSerial)} color='primary'>

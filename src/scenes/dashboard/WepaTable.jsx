@@ -10,6 +10,8 @@ import {
   Paper,
 } from '@mui/material';
 
+import { keyframes } from '@mui/material';
+
 import { useSound } from './SoundContext';
 import AlertModal from './AlertModal';
 import CustomSwitch from '../../components/CustomSwitch';
@@ -37,6 +39,41 @@ const WepaTable = ({
     statusMsg: '',
     printerText: '',
   });
+
+ const blink = keyframes`
+  from, to { opacity: 1; }
+  50% { opacity: 0.5; }
+`;
+
+const getCellStyles = (value) => {
+  if (value > 5) {
+    return {
+      py: 0.3,
+      px: 0.3,
+      fontSize: '0.875rem',
+      textAlign: 'center',
+    };
+  }
+
+  // Calculate the animation duration based on the value (shorter duration for lower values)
+  const duration = Math.max(0.5, (value / 5) * 2); // Faster blinking for lower values
+  const blinkingStyle = {
+    animation: `${blink} ${duration}s linear infinite`,
+  };
+
+  return {
+    py: 0.3,
+    px: 0.3,
+    fontSize: '0.875rem',
+    textAlign: 'center',
+    ...blinkingStyle,
+  };
+};
+
+
+
+
+
 
   const { playSound, stopSound } = useSound();
 
@@ -177,10 +214,10 @@ const WepaTable = ({
     <>
       <TableContainer
         component={Paper}
-        sx={{ maxHeight: '100%', textAlign: 'center'}}
+        sx={{ maxHeight: '100%', textAlign: 'center' }}
       >
         <Table
-          sx={{ width: '100%', minWidth: 200}}
+          sx={{ width: '100%', minWidth: 200 }}
           size='small'
           aria-label='WEPA table'
           stickyHeader
@@ -201,17 +238,10 @@ const WepaTable = ({
                   .map((column) => (
                     <TableCell
                       key={column.id}
-                      sx={{
-                        py: 0.3,
-                        px: 0.3,
-                        fontSize: '0.875rem',
-                        // border: '5px solid red',
-                        textAlign: 'center',
-                      }}
+                      sx={getCellStyles(row[column.id])} // Apply dynamic styling based on the consumable value
                     >
                       {column.id === 'notify' ? (
                         <CustomSwitch
-                      
                           checked={row.notifications}
                           onChange={() => handleToggleNotifications(rowIndex)}
                         />
@@ -237,6 +267,8 @@ const WepaTable = ({
       />
     </>
   );
+
+
 };
 
 export default WepaTable;
