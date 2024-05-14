@@ -18,6 +18,7 @@ import wumbo from './wumbo.mp3';
 
 // Exporting all sounds as an object
 const sounds = {
+  defaultSound,
   coffeepot,
   future,
   gabagool,
@@ -28,7 +29,7 @@ const sounds = {
   mrKrabsRobotSongRemix,
   myLeg,
   neHoyMenoy,
-  defaultSound,
+
   patrickScreaming,
   redBoneCarlWheezer,
   sellingChocolate,
