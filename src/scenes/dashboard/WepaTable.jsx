@@ -56,9 +56,9 @@ const getCellStyles = (value) => {
   }
 
   // Calculate the animation duration based on the value (shorter duration for lower values)
-  const duration = Math.max(0.5, (value / 5) * 2); // Faster blinking for lower values
+  const duration = Math.max(0.5, (value / 10) * 2); // Faster blinking for lower values
   const blinkingStyle = {
-    animation: `${blink} ${duration}s linear infinite`,
+    animation: `${blink} ${duration}s linear infinite`
   };
 
   return {

@@ -86,74 +86,74 @@ const Dashboard = () => {
     outline: 'none',
   };
 
-   return (
-     <SoundProvider>
-       <Modal
-         open={!userPermission}
-         onClose={() => setUserPermission(true)}
-         aria-labelledby='monitoring-modal-title'
-         aria-describedby='monitoring-modal-description'
-         closeAfterTransition
-       >
-         <Box sx={modalStyle}>
-           <BeginButton onBegin={beginMonitoring} />
-         </Box>
-       </Modal>
+  return (
+    <SoundProvider>
+      <Modal
+        open={!userPermission}
+        onClose={() => setUserPermission(true)}
+        aria-labelledby='monitoring-modal-title'
+        aria-describedby='monitoring-modal-description'
+        closeAfterTransition
+      >
+        <Box sx={modalStyle}>
+          <BeginButton onBegin={beginMonitoring} />
+        </Box>
+      </Modal>
 
-       <Box m='20px' opacity={userPermission ? '100%' : '0%'}>
-         <Box
-           display='flex'
-           alignItems='center'
-           justifyContent='center'
-           textAlign='center'
-         >
-           <Header title='NMSU Lab Crabs' subtitle='Automated Wepa App' />
-         </Box>
+      <Box m='20px' opacity={userPermission ? '100%' : '0%'}>
+        <Box
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          textAlign='center'
+        >
+          <Header title='NMSU Lab Crabs' subtitle='Automated Wepa App' />
+        </Box>
 
-         <Grid container spacing={2}>
-           {/* WepaTable taking up 8 spaces */}
-           <Grid item xs={12} sm={8}>
-             <Box sx={{ ...boxStyle, minHeight: 'auto' }}>
-               {/* Adjust minHeight as needed for the table */}
-               <WepaTable
-                 shouldFetchPrinters={shouldFetchPrinters}
-                 setShouldFetchPrinters={setShouldFetchPrinters}
-                 colors={colors}
-                 data={printerData}
-                 userPermission={userPermission}
-                 isMinimized={isTableMinimized}
-               />
-             </Box>
-           </Grid>
+        <Grid container spacing={2}>
+          {/* WepaTable taking up 8 spaces */}
+          <Grid item xs={12} sm={8}>
+            <Box sx={{ ...boxStyle, minHeight: 'auto' }}>
+              {/* Adjust minHeight as needed for the table */}
+              <WepaTable
+                shouldFetchPrinters={shouldFetchPrinters}
+                setShouldFetchPrinters={setShouldFetchPrinters}
+                colors={colors}
+                data={printerData}
+                userPermission={userPermission}
+                isMinimized={isTableMinimized}
+              />
+            </Box>
+          </Grid>
 
-           {/* Container for SettingsUI and New Component */}
-           <Grid item xs={12} sm={4}>
-             <Grid container spacing={2}>
-               {/* SettingsUI taking up the first space */}
-               <Grid item xs={12}>
-                 <Box sx={boxStyle}>
-                   <SettingsUI
-                     onCountdownComplete={handleCountdownComplete}
-                     colors={colors}
-                     toggleTable={toggleTable}
-                     startCountdown={startCountdown}
-                   />
-                 </Box>
-               </Grid>
+          {/* Container for SettingsUI and New Component */}
+          <Grid item xs={12} sm={4}>
+            <Grid container spacing={2}>
+              {/* SettingsUI taking up the first space */}
+              <Grid item xs={12}>
+                <Box sx={boxStyle}>
+                  <SettingsUI
+                    onCountdownComplete={handleCountdownComplete}
+                    colors={colors}
+                    toggleTable={toggleTable}
+                    startCountdown={startCountdown}
+                  />
+                </Box>
+              </Grid>
 
-               {/* New Grid item below SettingsUI */}
-               <Grid item xs={12}>
-                 <Box sx={boxStyle}>
-                   {/* Placeholder for the new component */}
-                   <div>New Component Here</div>
-                 </Box>
-               </Grid>
-             </Grid>
-           </Grid>
-         </Grid>
-       </Box>
-     </SoundProvider>
-   );
+              {/* New Grid item below SettingsUI */}
+              <Grid item xs={12}>
+                <Box sx={boxStyle}>
+                  {/* Placeholder for the new component */}
+                  <div>New Component Here</div>
+                </Box>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+    </SoundProvider>
+  );
 };
 
 export default Dashboard;
