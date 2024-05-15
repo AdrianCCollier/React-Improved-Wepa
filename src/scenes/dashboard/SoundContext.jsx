@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import sounds from '../../sounds/index';
+import {sounds, soundOptions} from '../../sounds/index';
 
 const SoundContext = createContext();
 

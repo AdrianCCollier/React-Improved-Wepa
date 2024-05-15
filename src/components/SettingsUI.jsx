@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 
 import { useSound } from '../scenes/dashboard/SoundContext';
-import sounds from '../sounds/index';
+import { sounds, soundOptions } from '../sounds/index';
 import BeginButton from '../scenes/dashboard/BeginButton';
 import CountdownTimer from '../scenes/dashboard/CountdownTimer';
 import VolumeDown from '@mui/icons-material/VolumeDown';
@@ -134,12 +134,12 @@ const SettingsUI = ({
             open={open}
             onClose={handleClose}
           >
-            {Object.keys(sounds).map((soundKey) => (
+            {soundOptions.map((option) => (
               <MenuItem
-                key={soundKey}
-                onClick={() => handleSoundChange(soundKey)}
+                key={option.key}
+                onClick={() => handleSoundChange(option.key)}
               >
-                {soundKey.replace(/([A-Z])/g, ' $1').trim()}{' '}
+                {option.displayName}
               </MenuItem>
             ))}
           </Menu>

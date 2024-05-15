@@ -26,7 +26,6 @@ function formatSoundName(name) {
     .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
 }
 
-
 // Exporting all sounds as an object
 const sounds = {
   defaultSound,
@@ -49,10 +48,9 @@ const sounds = {
 };
 
 // Create an array of formatted sound names for the dropdown
-const soundOptions = Object.keys(sounds).map(key => ({
+const soundOptions = Object.keys(sounds).map((key) => ({
   key,
-  displayName: formatSoundName(key)
+  displayName: formatSoundName(key),
 }));
-
 
 export { sounds, soundOptions };
