@@ -40,40 +40,34 @@ const WepaTable = ({
     printerText: '',
   });
 
- const blink = keyframes`
+  const blink = keyframes`
   from, to { opacity: 1; }
   50% { opacity: 0.5; }
 `;
 
-const getCellStyles = (value) => {
-  if (value > 5) {
+  const getCellStyles = (value) => {
+    if (value > 5) {
+      return {
+        py: 0.3,
+        px: 0.3,
+        fontSize: '0.875rem',
+        textAlign: 'center',
+      };
+    }
+
+    const duration = Math.max(0.5, (value / 10) * 2);
+    const blinkingStyle = {
+      animation: `${blink} ${duration}s linear infinite`,
+    };
+
     return {
       py: 0.3,
       px: 0.3,
       fontSize: '0.875rem',
       textAlign: 'center',
+      ...blinkingStyle,
     };
-  }
-
-  // Calculate the animation duration based on the value (shorter duration for lower values)
-  const duration = Math.max(0.5, (value / 10) * 2); // Faster blinking for lower values
-  const blinkingStyle = {
-    animation: `${blink} ${duration}s linear infinite`
   };
-
-  return {
-    py: 0.3,
-    px: 0.3,
-    fontSize: '0.875rem',
-    textAlign: 'center',
-    ...blinkingStyle,
-  };
-};
-
-
-
-
-
 
   const { playSound, stopSound } = useSound();
 
@@ -267,8 +261,6 @@ const getCellStyles = (value) => {
       />
     </>
   );
-
-
 };
 
 export default WepaTable;
