@@ -16,6 +16,17 @@ import spongeBobandPatrickRobBank from './spongebobAndPatrickRobABank.mp3';
 import whoYouCallinPinhead from './whoYouCallinPinhead.mp3';
 import wumbo from './wumbo.mp3';
 
+function formatSoundName(name) {
+  // Replace camelCase and other separators with spaces and capitalize each word
+  return name
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase to separate words
+    .replace(/([A-Z])/g, ' $1') // Handle all-uppercase words
+    .replace(/[-_]/g, ' ') // Replace dashes and underscores with spaces
+    .trim()
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize each word
+}
+
+
 // Exporting all sounds as an object
 const sounds = {
   defaultSound,
@@ -29,7 +40,6 @@ const sounds = {
   mrKrabsRobotSongRemix,
   myLeg,
   neHoyMenoy,
-
   patrickScreaming,
   redBoneCarlWheezer,
   sellingChocolate,
@@ -38,4 +48,11 @@ const sounds = {
   wumbo,
 };
 
-export default sounds;
+// Create an array of formatted sound names for the dropdown
+const soundOptions = Object.keys(sounds).map(key => ({
+  key,
+  displayName: formatSoundName(key)
+}));
+
+
+export { sounds, soundOptions };
